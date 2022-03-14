@@ -16,5 +16,5 @@ public class Admin {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private Set<Role> role;
+    private Role role;
 }

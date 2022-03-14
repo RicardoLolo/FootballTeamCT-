@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Data
@@ -36,6 +37,128 @@ public class Coach {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private Set<Role> role;
+    private Role role;
 
+    public Coach() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public double getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(double bonus) {
+        this.bonus = bonus;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    public MultipartFile getAvaFile() {
+        return avaFile;
+    }
+
+    public void setAvaFile(MultipartFile avaFile) {
+        this.avaFile = avaFile;
+    }
+
+    public String getAvatarURL() {
+        return avatarURL;
+    }
+
+    public void setAvatarURL(String avatarURL) {
+        this.avatarURL = avatarURL;
+    }
+
+    public MultipartFile getBackGroundFile() {
+        return backGroundFile;
+    }
+
+    public void setBackGroundFile(MultipartFile backGroundFile) {
+        this.backGroundFile = backGroundFile;
+    }
+
+    public String getAvatarBackGround() {
+        return avatarBackGround;
+    }
+
+    public void setAvatarBackGround(String avatarBackGround) {
+        this.avatarBackGround = avatarBackGround;
+    }
+
+    public String getGmail() {
+        return gmail;
+    }
+
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
+    }
+
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
+    public CoachType getCoachType() {
+        return coachType;
+    }
+
+    public void setCoachType(CoachType coachType) {
+        this.coachType = coachType;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }
