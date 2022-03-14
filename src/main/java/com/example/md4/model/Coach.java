@@ -36,6 +36,6 @@ public class Coach {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private Set<Role> role;
+    private Role role;
 
 }

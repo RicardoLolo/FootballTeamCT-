@@ -18,7 +18,7 @@ public class Player {
     private String country;
     private double height;
     private double weight;
-    private double BMI;
+    private double BMI;//W/(H*H)
     private double salary;
     private double bonus;
     private String introduction;
@@ -44,6 +44,10 @@ public class Player {
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     public Player() {
     }
