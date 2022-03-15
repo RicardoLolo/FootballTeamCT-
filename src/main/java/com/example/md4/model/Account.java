@@ -27,11 +27,13 @@ public class Account {
     private Player player;
 
     @ManyToMany(fetch = FetchType.EAGER)
-
     @JoinTable(name = "acc_roles",
             joinColumns = {@JoinColumn(name = "acc_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles;
+
+    public Account() {
+    }
 
     public Long getId() {
         return id;
