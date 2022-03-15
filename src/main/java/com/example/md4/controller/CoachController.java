@@ -1,11 +1,19 @@
 package com.example.md4.controller;
 
+import com.example.md4.model.Account;
 import com.example.md4.model.Coach;
 
+import com.example.md4.model.Role;
+import com.example.md4.repository.ICoachRepository;
+import com.example.md4.service.Account.IAccountService;
 import com.example.md4.service.coach.ICoachService;
+import com.example.md4.service.role.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/coach")
@@ -22,6 +31,18 @@ import java.util.Optional;
 public class CoachController {
     @Autowired
     private ICoachService coachService;
+
+    @Autowired
+    private ICoachRepository coachRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private IRoleService roleService;
+
+    @Autowired
+    private IAccountService accountService;
 
 
     @Value("${upload_file_ava}")
@@ -33,14 +54,14 @@ public class CoachController {
 
     @GetMapping("/create")
     public ModelAndView createCoach() {
-        ModelAndView modelAndView = new ModelAndView("create");
+        ModelAndView modelAndView = new ModelAndView("forms.html");
         modelAndView.addObject("coach", new Coach());
         return modelAndView;
     }
 
-        @PostMapping("/create")
+    @PostMapping("/create")
     public ModelAndView create(@ModelAttribute Coach coach) {
-        ModelAndView modelAndView = new ModelAndView("create");
+        ModelAndView modelAndView = new ModelAndView("forms.html");
         MultipartFile multipartFile = coach.getAvaFile();
         MultipartFile multipartFile1 = coach.getBackGroundFile();
         String fileName = multipartFile.getOriginalFilename();
@@ -51,21 +72,22 @@ public class CoachController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        Iterable<Coach> coaches = coachService.findAll();
-        modelAndView.addObject("coaches", coaches);
+        coachService.save(coach);
+        Coach coachNew = coachRepository.findCoachLast();
+        Account account = new Account();
+        account.setGmail(coachNew.getGmail());
+        account.setPassword(passwordEncoder.encode(coachNew.getPassword()));
+        account.setCoach(coachService.findById(coachNew.getId()).get());
+        account.setRoles((Set<Role>) roleService.findByName("COACH"));
+        accountService.save(account);
+//        modelAndView.addObject("coaches", coaches);
         return modelAndView;
     }
-//    @PostMapping("/create")
-//    public ModelAndView create(@ModelAttribute("coach") Coach coach) {
-//        ModelAndView modelAndView = new ModelAndView("create");
-//        coachService.save(coach);
-//        return modelAndView;
-//    }
 
 
     @GetMapping("/edit/{id}")
     public ModelAndView showEditForm(@PathVariable Long id) {
-        Optional<Coach> coach = coachService.findOne(id);
+        Optional<Coach> coach = coachService.findById(id);
         if (coach.isPresent()) {
             ModelAndView modelAndView = new ModelAndView("/profile_coach");
             modelAndView.addObject("coach", coach.get());

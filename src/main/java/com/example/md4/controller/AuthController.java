@@ -13,7 +13,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
@@ -33,10 +35,13 @@ public class AuthController {
     @Autowired
     private IRoleService roleService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Account account) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
+        Authentication authentication = authenticationManager.authenticate
+                (new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 

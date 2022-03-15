@@ -55,9 +55,4 @@ public class AccountService implements IAccountService{
     public Boolean existsByGmail(String username) {
         return accountRepository.existsByGmail(username);
     }
-
-    @Override
-    public Optional<Account> findByUsername(String username) {
-        return accountRepository.findByGmail(username);
-    }
 }

@@ -57,17 +57,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers("/api/auth/sign**",
-                        "/api/products/**",
-                        "/api/category/**",
-                        "/api/products").permitAll()
+                .antMatchers("/assets/**",
+                        "/blueprint-css/**",
+                        "/css/**",
+                        "/js/**",
+                        "/login",
+                        "/api/login")
+                .permitAll()
                 .antMatchers("/api/auth/hello")
-                .hasAnyAuthority("Admin")
+                .hasAnyAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtEntryPoint)

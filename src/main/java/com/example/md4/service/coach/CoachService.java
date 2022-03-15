@@ -24,7 +24,7 @@ public class CoachService implements ICoachService {
     }
 
     @Override
-    public Optional<Coach> findOne(Long id) {
+    public Optional<Coach> findById(Long id) {
         return coachRepository.findById(id);
     }
 
@@ -35,7 +35,7 @@ public class CoachService implements ICoachService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void remove(Long id) {
         coachRepository.deleteById(id);
     }
 
