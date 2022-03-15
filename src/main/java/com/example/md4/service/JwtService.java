@@ -1,4 +1,4 @@
-package com.example.md4.service.jwtService;
+package com.example.md4.service;
 
 import com.example.md4.model.AccountPrinciple;
 import io.jsonwebtoken.*;
@@ -27,7 +27,7 @@ public class JwtService {
                 .compact();
     }
 
-    public boolean validateJwtToken(String authToken) {
+    public boolean validateToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(authToken);
             return true;
@@ -55,4 +55,3 @@ public class JwtService {
         return userName;
     }
 }
-

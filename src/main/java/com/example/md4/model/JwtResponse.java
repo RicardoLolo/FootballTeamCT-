@@ -8,16 +8,16 @@ public class JwtResponse {
     private Long id;
     private String token;
     private String type = "Bearer";
-    private String email;
+    private String gmail;
     private Collection<? extends GrantedAuthority> roles;
 
     public JwtResponse() {
     }
 
-    public JwtResponse(Long id, String token, String email, Collection<? extends GrantedAuthority> roles) {
+    public JwtResponse(Long id, String token, String gmail, Collection<? extends GrantedAuthority> roles) {
         this.id = id;
         this.token = token;
-        this.email = email;
+        this.gmail = gmail;
         this.roles = roles;
     }
 
@@ -46,11 +46,11 @@ public class JwtResponse {
     }
 
     public String getEmail() {
-        return email;
+        return gmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String gmail) {
+        this.gmail = gmail;
     }
 
     public Collection<? extends GrantedAuthority> getRoles() {

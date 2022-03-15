@@ -1,4 +1,4 @@
-package com.example.md4.service.account;
+package com.example.md4.service.Account;
 
 import com.example.md4.model.Account;
 import com.example.md4.model.AccountPrinciple;
@@ -15,11 +15,6 @@ import java.util.Optional;
 public class AccountService implements IAccountService{
     @Autowired
     private IAccountRepository accountRepository;
-
-    @Override
-    public Optional<Account> findByUsername(String username) {
-        return Optional.empty();
-    }
 
     @Override
     public Optional<Account> findByGmail(String username) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -28,7 +28,7 @@
 
 </head>
 
-<body class="bg-theme bg-theme2">
+<body class="bg-theme bg-theme3">
 
 <!-- start loader -->
 <!--<div id="pageloader-overlay" class="visible incoming">-->
@@ -51,37 +51,70 @@
         <div class="container-fluid">
             <div class="row mt-3">
 
-                <!--Tao account player-->
+                <!--Tao account HLV-->
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-title">Round Vertical Form</div>
+                            <div class="card-title">Coach</div>
                             <hr>
-                            <form>
+                            <form th:action="@{/coach/save-coach}" th:object="${coach}" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="input-1">Name</label>
                                     <input type="text" class="form-control form-control-rounded" id="input-1"
-                                           placeholder="Enter Your Name">
+                                           placeholder="Enter Your Name" th:field="*{name}">
                                 </div>
                                 <div class="form-group">
                                     <label for="input-2">Email</label>
                                     <input type="text" class="form-control form-control-rounded" id="input-2"
-                                           placeholder="Enter Your Email Address">
+                                           placeholder="Enter Your Email" th:field="*{gmail}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input-3">Mobile</label>
-                                    <input type="text" class="form-control form-control-rounded" id="input-3"
-                                           placeholder="Enter Your Mobile Number">
+                                    <label for="input-3">Date of birth</label>
+                                    <input type="date" class="form-control form-control-rounded" id="input-3"
+                                           placeholder="00/00/0000" th:field="*{birthday}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input-4">Password</label>
+                                    <label for="input-4">Country</label>
                                     <input type="text" class="form-control form-control-rounded" id="input-4"
-                                           placeholder="Enter Password">
+                                           placeholder="Enter Your Country" th:field="*{country}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input-5">Confirm Password</label>
+                                    <label for="input-5">Salary</label>
                                     <input type="text" class="form-control form-control-rounded" id="input-5"
-                                           placeholder="Confirm Password">
+                                           placeholder="Enter Your Salary" th:field="*{salary}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-6">Bonus</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-6"
+                                           placeholder="Enter Your Bonus" th:field="*{bonus}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-7">Introduction</label>
+                                    <textarea class="form-control form-control-rounded" id="input-7" cols="30" rows="3"
+                                              placeholder="Enter Your Introduction" th:field="*{introduction}">
+                                    </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-8">Avatar</label>
+                                    <input type="file" class="form-control form-control-rounded" id="input-8"
+                                           placeholder="Enter Your Avatar" th:field="*{avaFile}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-9">BackGround</label>
+                                    <input type="file" class="form-control form-control-rounded" id="input-9"
+                                           placeholder="Enter Your BackGround" th:field="*{backGroundFile}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-10">Coach Type</label>
+                                    <select th:field="*{coachType}" id="input-10" class="form-control form-control-rounded">
+                                        <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-11">Password</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-11"
+                                           placeholder="Enter Your Password">
                                 </div>
                                 <div class="form-group py-2">
                                     <div class="icheck-material-white">
@@ -102,37 +135,94 @@
                     </div>
                 </div>
 
-                <!--Tao account HLV-->
+                <!--Tao account player-->
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-title">Round Vertical Form</div>
+                            <div class="card-title">Player</div>
                             <hr>
-                            <form>
+                            <form th:action="@{/player/save-player}" th:object="${player}" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="input-6">Name</label>
-                                    <input type="text" class="form-control form-control-rounded" id="input-6"
-                                           placeholder="Enter Your Name">
+                                    <label for="input-12">Name</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-12"
+                                           placeholder="Enter Your Name" th:field="*{name}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input-7">Email</label>
-                                    <input type="text" class="form-control form-control-rounded" id="input-7"
-                                           placeholder="Enter Your Email Address">
+                                    <label for="input-13">Email</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-13"
+                                           placeholder="Enter Your Email Address" th:field="*{gmail}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input-8">Mobile</label>
-                                    <input type="text" class="form-control form-control-rounded" id="input-8"
-                                           placeholder="Enter Your Mobile Number">
+                                    <label for="input-14">Date of Birth</label>
+                                    <input type="date" class="form-control form-control-rounded" id="input-14"
+                                           placeholder="Enter Your Date of Birth" th:field="*{birthday}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input-9">Password</label>
-                                    <input type="text" class="form-control form-control-rounded" id="input-9"
-                                           placeholder="Enter Password">
+                                    <label for="input-15">Country</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-15"
+                                           placeholder="Enter Your Country" th:field="*{country}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input-10">Confirm Password</label>
-                                    <input type="text" class="form-control form-control-rounded" id="input-10"
-                                           placeholder="Confirm Password">
+                                    <label for="input-16">Height</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-16"
+                                           placeholder="Enter Your Height" th:field="*{height}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-17">Weight</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-17"
+                                           placeholder="Enter Your Weight" th:field="*{weight}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-18">Salary</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-18"
+                                           placeholder="Enter Your Salary"  th:field="*{salary}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-19">Bonus</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-19"
+                                           placeholder="Enter Your Bonus" th:field="*{bonus}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-20">Introduction</label>
+                                    <textarea class="form-control form-control-rounded" id="input-20" cols="30" rows="3"
+                                              placeholder="Enter Your Introduction" th:field="*{introduction}">
+                                    </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-21">Avatar</label>
+                                    <input type="file" class="form-control form-control-rounded" id="input-21"
+                                           placeholder="Enter Your Avatar" th:field="*{avaFile}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-23">BackGround</label>
+                                    <input type="file" class="form-control form-control-rounded" id="input-23"
+                                           placeholder="Enter Your BackGround" th:field="*{backGroundFile}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-24">Position</label>
+                                    <select th:field="*{position}" id="input-24" class="form-control form-control-rounded">
+                                        <option th:each="pos : ${position}" th:value="${pos.id}" th:text="${pos.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-25">Performance</label>
+                                    <select th:field="*{performance}" id="input-25" class="form-control form-control-rounded">
+                                        <option th:each="per : ${performance}" th:value="${per.id}" th:text="${per.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-26">Status</label>
+                                    <select th:field="*{status}" id="input-26" class="form-control form-control-rounded">
+                                        <option th:each="s : ${status}" th:value="${s.id}" th:text="${s.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-27">Password</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-27"
+                                           placeholder="Enter Your Password" th:field="*{password}">
                                 </div>
                                 <div class="form-group py-2">
                                     <div class="icheck-material-white">

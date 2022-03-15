@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -8,22 +8,22 @@
     <meta name="author" content=""/>
     <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
     <!-- loader-->
-    <link href="assets/css/pace.min.css" rel="stylesheet"/>
-    <script src="assets/js/pace.min.js"></script>
+    <link th:href="@{/assets/css/pace.min.css}" rel="stylesheet"/>
+    <script th:src="@{/assets/js/pace.min.js}"></script>
     <!--favicon-->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" th:href="@{/assets/images/favicon.ico}" type="image/x-icon">
     <!-- simplebar CSS-->
-    <link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
+    <link th:href="@{/assets/plugins/simplebar/css/simplebar.css}" rel="stylesheet"/>
     <!-- Bootstrap core CSS-->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet"/>
     <!-- animate CSS-->
-    <link href="assets/css/animate.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/animate.css}" rel="stylesheet" type="text/css"/>
     <!-- Icons CSS-->
-    <link href="assets/css/icons.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/icons.css}" rel="stylesheet" type="text/css"/>
     <!-- Sidebar CSS-->
-    <link href="assets/css/sidebar-menu.css" rel="stylesheet"/>
+    <link th:href="@{/assets/css/sidebar-menu.css}" rel="stylesheet"/>
     <!-- Custom Style-->
-    <link href="assets/css/app-style.css" rel="stylesheet"/>
+    <link th:href="@{/assets/css/app-style.css}" rel="stylesheet"/>
 
 </head>
 <body>
@@ -37,12 +37,6 @@
                     <i class="icon-menu menu-icon"></i>
                 </a>
             </li>
-            <!--            <li class="nav-item">-->
-            <!--                <form class="search-bar">-->
-            <!--                    <input type="text" class="form-control" placeholder="Enter keywords">-->
-            <!--                    <a href="#"><i class="icon-magnifier"></i></a>-->
-            <!--                </form>-->
-            <!--            </li>-->
         </ul>
 
         <ul class="navbar-nav align-items-center right-nav-link">
@@ -92,7 +86,7 @@
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+                    <li class="dropdown-item text-danger"><i class="icon-power mr-2"></i> Logout</li>
                 </ul>
             </li>
         </ul>
@@ -101,16 +95,16 @@
 <!--End topbar header-->
 
     <!-- Bootstrap core JavaScript-->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script th:src="@{/assets/js/jquery.min.js}"></script>
+    <script th:src="@{/assets/js/popper.min.js}"></script>
+    <script th:src="@{/assets/js/bootstrap.min.js}"></script>
 
     <!-- simplebar js -->
-    <script src="assets/plugins/simplebar/js/simplebar.js"></script>
+    <script th:src="@{//plugins/simplebar/js/simplebar.js}"></script>
     <!-- sidebar-menu js -->
-    <script src="assets/js/sidebar-menu.js"></script>
+    <script th:src="@{/assets/js/sidebar-menu.js}"></script>
 
     <!-- Custom scripts -->
-    <script src="assets/js/app-script.js"></script>
+    <script th:src="@{/assets/js/app-script.js}"></script>
 </body>
 </html>

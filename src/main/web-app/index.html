@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -8,7 +8,7 @@
     <meta name="author" content=""/>
     <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
     <!-- loader-->
-    <link href="assets/css/pace.min.css" rel="stylesheet"/>
+    <link th:href="@{assets/css/pace.min.css}" rel="stylesheet"/>
     <script src="assets/js/pace.min.js"></script>
     <!--favicon-->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
@@ -29,7 +29,7 @@
 
 </head>
 
-<body class="bg-theme bg-theme2">
+<body class="bg-theme bg-theme3">
 <!-- start loader -->
 <!--<div id="pageloader-overlay" class="visible incoming">-->
 <!--    <div class="loader-wrapper-outer">-->

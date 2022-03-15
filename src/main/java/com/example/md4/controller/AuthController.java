@@ -3,8 +3,8 @@ package com.example.md4.controller;
 import com.example.md4.model.Account;
 import com.example.md4.model.JwtResponse;
 import com.example.md4.model.Role;
-import com.example.md4.service.account.IAccountService;
-import com.example.md4.service.jwtService.JwtService;
+import com.example.md4.service.Account.IAccountService;
+import com.example.md4.service.JwtService;
 import com.example.md4.service.role.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -69,5 +69,3 @@ public class AuthController {
         }
     }
 }
-
-

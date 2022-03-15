@@ -36,9 +36,9 @@ public class Coach {
     @JoinColumn(name = "couchType_id")
     private CoachType coachType;
 
-    public Long getId(){
-        return id;
-    }
+   public Long getId(){
+       return id;
+   }
 
     public void setId(long id) {
         this.id = id;

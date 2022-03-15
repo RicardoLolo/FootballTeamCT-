@@ -21,8 +21,8 @@ public class AccountPrinciple implements UserDetails {
     private Collection<? extends GrantedAuthority> roles;
 
     public AccountPrinciple(Long id,
-                            String gmailAddress, String password,
-                            Collection<? extends GrantedAuthority> roles) {
+                         String gmailAddress, String password,
+                         Collection<? extends GrantedAuthority> roles) {
         this.id = id;
         this.gmailAddress = gmailAddress;
         this.password = password;
