@@ -6,9 +6,9 @@ import com.example.md4.repository.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -16,11 +16,13 @@ public class AccountService implements IAccountService{
     @Autowired
     private IAccountRepository accountRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
     public Optional<Account> findByUsername(String username) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Account> findByGmail(String username) {
         return accountRepository.findByGmail(username);
     }
 
@@ -45,11 +47,17 @@ public class AccountService implements IAccountService{
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Account> userOptional = accountRepository.findByGmail(username);
         if (!userOptional.isPresent()) {
             throw new UsernameNotFoundException(username);
         }
         return AccountPrinciple.build(userOptional.get());
+    }
+
+    @Override
+    public Boolean existsByGmail(String username) {
+        return accountRepository.existsByGmail(username);
     }
 }

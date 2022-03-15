@@ -1,5 +1,7 @@
 package com.example.md4.config;
 
+import com.example.md4.model.Account;
+import com.example.md4.service.account.AccountService;
 import com.example.md4.service.account.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +16,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.annotation.PostConstruct;
+import java.util.List;
 
 
 @Configuration
@@ -22,12 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private IAccountService accountService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
+    }
+
+    @Bean
+    public RestAuthenticationEntryPoint restAuthenticationEntryPoint() {
+        return new RestAuthenticationEntryPoint();
     }
 
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
@@ -37,42 +45,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public RestAuthenticationEntryPoint restServicesEntryPoint() {
-        return new RestAuthenticationEntryPoint();
-    }
-
-    @Bean
-    public CustomAccessDeniedHandler customAccessDeniedHandler() {
-        return new CustomAccessDeniedHandler();
-    }
-
-    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Autowired
-    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(accountService).passwordEncoder(passwordEncoder());
+//    @Autowired
+//    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(accountService).passwordEncoder(passwordEncoder());
+//    }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(accountService)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().ignoringAntMatchers("/**");
-        http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
-        http.authorizeRequests()
-                .antMatchers("/static/**",
-                        "/css/**",
-                        "/js/**",
-                        "/login",
-                        "/api/login").permitAll()
-                .antMatchers("/api/use/**").hasAnyAuthority("ROLE_PLAYER")
+        http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers("/api/auth/sign**",
+                        "/api/products/**",
+                        "/api/category/**",
+                        "/api/products").permitAll()
+                .antMatchers("/api/auth")
+                .hasAnyAuthority("Admin")
                 .anyRequest().authenticated()
                 .and()
-                .logout().permitAll()
-                .and().csrf().disable();
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
-        http.sessionManagement()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(restAuthenticationEntryPoint())
+                .and()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.cors();
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
+}

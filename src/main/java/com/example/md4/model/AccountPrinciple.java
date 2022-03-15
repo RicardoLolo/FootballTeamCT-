@@ -13,17 +13,17 @@ public class AccountPrinciple implements UserDetails {
 
     private Long id;
 
-    private String emailAddress;
+    private String gmailAddress;
 
     private String password;
 
     private Collection<? extends GrantedAuthority> roles;
 
     public AccountPrinciple(Long id,
-                            String emailAddress, String password,
+                            String gmailAddress, String password,
                             Collection<? extends GrantedAuthority> roles) {
         this.id = id;
-        this.emailAddress = emailAddress;
+        this.gmailAddress = gmailAddress;
         this.password = password;
         this.roles = roles;
     }
@@ -45,7 +45,7 @@ public class AccountPrinciple implements UserDetails {
 
     @Override
     public String getUsername() {
-        return emailAddress;
+        return gmailAddress;
     }
 
     @Override

@@ -13,8 +13,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin("*")
@@ -50,6 +53,19 @@ public class AuthController {
     public ResponseEntity<Optional<Role>> roleById(@RequestParam("id") Long id) {
         Optional<Role> roles = roleService.findById(id);
         return ResponseEntity.ok(roles);
+    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @PostConstruct
+    public void init() {
+        List<Account> accounts = (List<Account>) accountService.findAll();
+        if (accounts.isEmpty()) {
+            Account account = new Account();
+            account.setGmail("loloringo9999@gmail.com");
+            account.setPassword(passwordEncoder.encode("Lolomomo"));
+            accountService.save(account);
+        }
     }
 }
 
