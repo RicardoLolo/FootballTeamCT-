@@ -12,13 +12,13 @@ public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private LocalDate birthday;
     private String country;
     private double height;
     private double weight;
-    private double BMI;
+    private double BMI;//W/(H*H)
     private double salary;
     private double bonus;
     private String introduction;
@@ -30,7 +30,9 @@ public class Player {
     @Transient
     private MultipartFile backGroundFile;
     private String avatarBackGround;
+    @Column(unique = true, nullable = false)
     private String gmail;
+    @Column(nullable = false)
     private String password;
 
     @ManyToOne
@@ -48,7 +50,7 @@ public class Player {
     public Player() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

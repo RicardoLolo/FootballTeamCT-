@@ -2,9 +2,10 @@ package com.example.md4.controller;
 
 import com.example.md4.model.Coach;
 
-import com.example.md4.service.ICoachService;
+import com.example.md4.service.coach.ICoachService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +18,10 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/coach")
+@ComponentScan("")
 public class CoachController {
     @Autowired
     private ICoachService coachService;
-
 
 
     @Value("${upload_file_ava}")
@@ -30,7 +31,6 @@ public class CoachController {
     private String upload_file_background;
 
 
-
     @GetMapping("/create")
     public ModelAndView createCoach() {
         ModelAndView modelAndView = new ModelAndView("create");
@@ -38,7 +38,7 @@ public class CoachController {
         return modelAndView;
     }
 
-    @PostMapping("/create")
+        @PostMapping("/create")
     public ModelAndView create(@ModelAttribute Coach coach) {
         ModelAndView modelAndView = new ModelAndView("create");
         MultipartFile multipartFile = coach.getAvaFile();
@@ -51,30 +51,37 @@ public class CoachController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-        String message = coachService.save(coach);
         Iterable<Coach> coaches = coachService.findAll();
         modelAndView.addObject("coaches", coaches);
-        modelAndView.addObject("message", message);
         return modelAndView;
     }
+//    @PostMapping("/create")
+//    public ModelAndView create(@ModelAttribute("coach") Coach coach) {
+//        ModelAndView modelAndView = new ModelAndView("create");
+//        coachService.save(coach);
+//        return modelAndView;
+//    }
 
 
     @GetMapping("/edit/{id}")
-    public ModelAndView edit(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("edit");
+    public ModelAndView showEditForm(@PathVariable Long id) {
         Optional<Coach> coach = coachService.findOne(id);
-        coach.ifPresent(value -> modelAndView.addObject("coach", value));
-        return modelAndView;
-    }
-    @PostMapping("/edit/{id}")
-    public String edit(@ModelAttribute Optional<Coach> coach, @PathVariable Long id) {
         if (coach.isPresent()) {
-            Coach coachEdit = coach.get();
-            coachEdit.setId(id);
-            coachService.save(coachEdit);
+            ModelAndView modelAndView = new ModelAndView("/profile_coach");
+            modelAndView.addObject("coach", coach.get());
+            return modelAndView;
+        } else {
+            return new ModelAndView("/error.404");
         }
-        return "redirect:/coach";
+    }
+
+    @PostMapping("/edit")
+    public ModelAndView updateCustomer(@ModelAttribute("coach") Coach coach) {
+        coachService.save(coach);
+        ModelAndView modelAndView = new ModelAndView("/profile_couch");
+        modelAndView.addObject("coach", coach);
+        modelAndView.addObject("message", "Customer updated successfully");
+        return modelAndView;
     }
 
 }

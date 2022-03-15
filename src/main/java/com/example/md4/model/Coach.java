@@ -4,7 +4,6 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 @Data
@@ -13,7 +12,7 @@ public class Coach {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private LocalDate birthday;
     private String country;
@@ -28,23 +27,18 @@ public class Coach {
     @Transient
     private MultipartFile backGroundFile;
     private String avatarBackGround;
+    @Column(unique = true, nullable = false)
     private String gmail;
-    private String passWord;
+    @Column(nullable = false)
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "couchType_id")
     private CoachType coachType;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
-
-    public Coach() {
-    }
-
-    public long getId() {
-        return id;
-    }
+   public Long getId(){
+       return id;
+   }
 
     public void setId(long id) {
         this.id = id;
@@ -138,12 +132,12 @@ public class Coach {
         this.gmail = gmail;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public CoachType getCoachType() {
@@ -152,13 +146,5 @@ public class Coach {
 
     public void setCoachType(CoachType coachType) {
         this.coachType = coachType;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }
