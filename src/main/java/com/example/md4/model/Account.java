@@ -32,6 +32,9 @@ public class Account {
     public Account() {
     }
 
+    public Account(String gmail, String encode, Long id, int i) {
+    }
+
     public Long getId() {
         return id;
     }
