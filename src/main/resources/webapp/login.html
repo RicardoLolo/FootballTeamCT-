@@ -23,8 +23,8 @@
 
     <script>
         function signIn() {
-            let username = $('#exampleInputUsername').val();
-            let password = $('#exampleInputPassword').val();
+            let username = $("#exampleInputUsername").val();
+            let password = $("#exampleInputPassword").val();
             let data = {
                 username: username,
                 password: password
@@ -39,12 +39,14 @@
                 data: JSON.stringify(data),
                 success: function (result) {
                     localStorage.setItem("currentUser", JSON.stringify(result));
-                    window.location.href = "/demo-m4/list-product.html"
+                    window.location.href = "index.html"
                 }.fail(function () {
-                    window.location.href = "/demo-m4/login.html";
+                    document.getElementById("singInFalse").innerHTML = "Account password is wrong, please login again!"
+                    // window.location.href = "/demo-m4/login.html";
                 })
             })
         }
+        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     </script>
 </head>
 
@@ -78,6 +80,7 @@
                     <img src="assets/images/logo-icon.png" alt="logo icon">
                 </div>
                 <div class="card-title text-uppercase text-center py-3">Sign In</div>
+                <div class="card-title text-uppercase text-center py-3" id="singInFalse"></div>
                 <form>
                     <div class="form-group">
                         <label for="exampleInputUsername" class="sr-only">Username</label>

@@ -27,7 +27,7 @@ public class JwtService {
                 .compact();
     }
 
-    public boolean validateJwtToken(String authToken) {
+    public boolean validateToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(authToken);
             return true;
