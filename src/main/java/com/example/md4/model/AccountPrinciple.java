@@ -5,8 +5,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class AccountPrinciple implements UserDetails {
     private static final long serialVersionUID = 1L;
@@ -29,13 +30,15 @@ public class AccountPrinciple implements UserDetails {
     }
 
     public static AccountPrinciple build(Account user) {
-        GrantedAuthority authorities =  new SimpleGrantedAuthority(user.getRoles().getRole());
+        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
+                new SimpleGrantedAuthority(role.getRole())
+        ).collect(Collectors.toList());
 
         return new AccountPrinciple(
                 user.getId(),
                 user.getGmail(),
                 user.getPassword(),
-                Collections.singleton(authorities)
+                authorities
         );
     }
 

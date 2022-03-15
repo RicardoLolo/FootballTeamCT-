@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -36,10 +37,13 @@ public class AuthController {
     @Autowired
     private IRoleService roleService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Account account) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
+        Authentication authentication = authenticationManager.authenticate
+                (new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -54,9 +58,6 @@ public class AuthController {
         Optional<Role> roles = roleService.findById(id);
         return ResponseEntity.ok(roles);
     }
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @PostConstruct
     public void init() {
         List<Account> accounts = (List<Account>) accountService.findAll();

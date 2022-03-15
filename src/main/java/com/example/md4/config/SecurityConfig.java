@@ -1,7 +1,5 @@
 package com.example.md4.config;
 
-import com.example.md4.model.Account;
-import com.example.md4.service.account.AccountService;
 import com.example.md4.service.account.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,10 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import javax.annotation.PostConstruct;
-import java.util.List;
-
 
 @Configuration
 @EnableWebSecurity
@@ -73,9 +67,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/auth")
                 .hasAnyAuthority("Admin")
                 .anyRequest().authenticated()
+                .antMatchers("/assets/**",
+                        "/blueprint-css/**",
+                        "/css/**",
+                        "/js/**",
+                        "/login",
+                        "/api/login").permitAll()
+                .antMatchers("/api/auth/hello")
+                .hasAnyAuthority("ADMIN")
+                .anyRequest().authenticated()
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(restAuthenticationEntryPoint)

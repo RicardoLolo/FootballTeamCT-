@@ -3,6 +3,7 @@ package com.example.md4.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -25,12 +26,12 @@ public class Account {
     @JoinColumn(name = "player_id")
     private Player player;
 
-    @ManyToOne
-    @JoinTable(name = "role_id")
-    private Role roles;
+    @ManyToMany(fetch = FetchType.EAGER)
 
-    public Account() {
-    }
+    @JoinTable(name = "acc_roles",
+            joinColumns = {@JoinColumn(name = "acc_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles;
 
     public Long getId() {
         return id;
@@ -76,11 +77,11 @@ public class Account {
         this.player = player;
     }
 
-    public Role getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Role roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 }
