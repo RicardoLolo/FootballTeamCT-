@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -22,13 +22,23 @@
     <link href="assets/css/app-style.css" rel="stylesheet"/>
 
     <script>
-        function signIn() {
-            let gmail = $("#exampleInputUsername").val();
-            let password = $("#exampleInputPassword").val();
+        function login() {
+            let gmail = $('#exampleInputUsername').val();
+            let password = $('#exampleInputPassword').val();
+            if (gmail === "") {
+                document.getElementById("error").innerHTML = "Gmail address cannot be blank !";
+                event.preventDefault();
+                return false;
+            }
+            if (password === "") {
+                document.getElementById("error").innerHTML = "Password can not be blank !";
+                event.preventDefault();
+                return false;
+            }
             let data = {
                 gmail: gmail,
                 password: password
-            }
+            };
             $.ajax({
                 url: `http://localhost:8080/api/login`,
                 type: 'POST',
@@ -37,15 +47,18 @@
                     'Content-type': 'application/json'
                 },
                 data: JSON.stringify(data),
-                success: function (result) {
-                    localStorage.setItem("currentUser", JSON.stringify(result));
-                    console.log(JSON.stringify(result));
-                    window.location.href = "index.html";
-                }.fail(function () {
-                    document.getElementById("singInFalse").innerHTML = "Account password is wrong, please login again!";
-                    console.log("fail")
-                })
-            })
+                success: function (data) {
+                    if (data.status === 202) {
+                        document.getElementById("error").innerHTML = "Email name or password is incorrect !"
+                        return false;
+                    } else {
+                        document.getElementById("error").innerHTML = data.email + ": " + data.token ;
+                        localStorage.setItem("token", data.token);
+                        localStorage.setItem("currentUser", JSON.stringify(data));
+                        window.location.href = "index.html"
+                    }
+                }
+            });
             event.preventDefault();
         }
     </script>
@@ -81,6 +94,7 @@
                     <img src="assets/images/logo-icon.png" alt="logo icon">
                 </div>
                 <div class="card-title text-uppercase text-center py-3">Sign In</div>
+                <div class="card-title text-uppercase text-center py-3" id="error"></div>
                 <form>
                     <div class="form-group">
                         <label for="exampleInputUsername" class="sr-only">Username</label>
@@ -116,7 +130,7 @@
 <!--                    <button  class="btn btn-light btn-block"-->
 <!--                            onclick="signin()">Sign In-->
 <!--                    </button>-->
-                    <input class="btn btn-light btn-block" onclick="signIn()" type="button" value="Sign In">
+                    <input class="btn btn-light btn-block" onclick="login()" type="button" value="Sign In">
                     <div class="text-center mt-3">Sign In With</div>
 
                     <div class="form-row mt-4">

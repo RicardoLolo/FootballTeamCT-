@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface IAccountRepository extends JpaRepository<Account, Long> {
     Optional<Account> findByGmail(String username);
     Boolean existsByGmail(String username);
+    Optional<Account> findAccountByGmailAndPassword(String username,String password);
 }

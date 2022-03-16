@@ -10,4 +10,6 @@ public interface IAccountService extends IGeneralService<Account>, UserDetailsSe
     Optional<Account> findByGmail(String username);
 
     Boolean existsByGmail(String username);
+
+    Optional<Account> findAccountByGmailAndPassword(String username,String password);
 }

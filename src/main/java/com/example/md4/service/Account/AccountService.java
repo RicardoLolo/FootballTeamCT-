@@ -55,4 +55,9 @@ public class AccountService implements IAccountService{
     public Boolean existsByGmail(String username) {
         return accountRepository.existsByGmail(username);
     }
+
+    @Override
+    public Optional<Account> findAccountByGmailAndPassword(String username, String password) {
+        return accountRepository.findAccountByGmailAndPassword(username, password);
+    }
 }

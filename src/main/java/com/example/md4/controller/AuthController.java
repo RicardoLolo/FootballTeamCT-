@@ -40,20 +40,28 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Account account) {
-        Authentication authentication = authenticationManager.authenticate
-                (new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
+        if (!accountService.findAccountByGmailAndPassword(account.getGmail(), account.getPassword()).isPresent()){
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtService.generateTokenLogin(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Account currentUser = accountService.findByGmail(account.getGmail()).get();
-        return ResponseEntity.ok(new JwtResponse(currentUser.getId(),jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+        }
+        return (ResponseEntity<?>) ResponseEntity.notFound();
     }
 
     @GetMapping("/role/{id}")
     public ResponseEntity<Optional<Role>> roleById(@RequestParam("id") Long id) {
         Optional<Role> roles = roleService.findById(id);
         return ResponseEntity.ok(roles);
+    }
+
+    @GetMapping("/test")
+    public ModelAndView test(){
+        return new ModelAndView("index");
     }
 }

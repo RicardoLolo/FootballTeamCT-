@@ -11,7 +11,7 @@ $(function() {
 					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
 					datasets: [{
 						label: 'New Visitor',
-						data: [3, 3, 8, 5, 7, 4, 6, 4, 6, 3],
+						data: [4, 9, 8, 5, 7, 4, 6, 4, 6, 3],
 						backgroundColor: '#fff',
 						borderColor: "transparent",
 						pointRadius :"0",
