@@ -53,11 +53,6 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(currentUser.getId(),jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
-    @GetMapping("/role/{id}")
-    public ResponseEntity<Optional<Role>> roleById(@RequestParam("id") Long id) {
-        Optional<Role> roles = roleService.findById(id);
-        return ResponseEntity.ok(roles);
-    }
     @PostConstruct
     public void init() {
         List<Account> accounts = (List<Account>) accountService.findAll();

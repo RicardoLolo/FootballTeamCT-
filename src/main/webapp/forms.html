@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
+    <!-- loader-->
+    <link href="assets/css/pace.min.css" rel="stylesheet"/>
+    <script src="assets/js/pace.min.js"></script>
+    <!--favicon-->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <!-- simplebar CSS-->
+    <link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
+    <!-- Bootstrap core CSS-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- animate CSS-->
+    <link href="assets/css/animate.css" rel="stylesheet" type="text/css"/>
+    <!-- Icons CSS-->
+    <link href="assets/css/icons.css" rel="stylesheet" type="text/css"/>
+    <!-- Sidebar CSS-->
+    <link href="assets/css/sidebar-menu.css" rel="stylesheet"/>
+    <!-- Custom Style-->
+    <link href="assets/css/app-style.css" rel="stylesheet"/>
+
+
+</head>
+
+<body class="bg-theme bg-theme3">
+
+<!-- start loader -->
+<!--<div id="pageloader-overlay" class="visible incoming">-->
+<!--    <div class="loader-wrapper-outer">-->
+<!--        <div class="loader-wrapper-inner">-->
+<!--            <div class="loader"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!-- end loader -->
+
+<!-- Start wrapper-->
+<div id="wrapper">
+
+    <div id="_wrapper_footer"></div>
+
+    <header id="_header"></header>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row mt-3">
+
+                <!--Tao account HLV-->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">Coach</div>
+                            <hr>
+                            <form th:action="@{/coach/save-coach}" th:object="${coach}" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="input-1">Name</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-1"
+                                           placeholder="Enter Your Name" th:field="*{name}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-2">Email</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-2"
+                                           placeholder="Enter Your Email" th:field="*{gmail}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-3">Date of birth</label>
+                                    <input type="date" class="form-control form-control-rounded" id="input-3"
+                                           placeholder="00/00/0000" th:field="*{birthday}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-4">Country</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-4"
+                                           placeholder="Enter Your Country" th:field="*{country}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-5">Salary</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-5"
+                                           placeholder="Enter Your Salary" th:field="*{salary}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-6">Bonus</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-6"
+                                           placeholder="Enter Your Bonus" th:field="*{bonus}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-7">Introduction</label>
+                                    <textarea class="form-control form-control-rounded" id="input-7" cols="30" rows="3"
+                                              placeholder="Enter Your Introduction" th:field="*{introduction}">
+                                    </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-8">Avatar</label>
+                                    <input type="file" class="form-control form-control-rounded" id="input-8"
+                                           placeholder="Enter Your Avatar" th:field="*{avaFile}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-9">BackGround</label>
+                                    <input type="file" class="form-control form-control-rounded" id="input-9"
+                                           placeholder="Enter Your BackGround" th:field="*{backGroundFile}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-10">Coach Type</label>
+                                    <select th:field="*{coachType}" id="input-10" class="form-control form-control-rounded">
+                                        <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-11">Password</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-11"
+                                           placeholder="Enter Your Password">
+                                </div>
+                                <div class="form-group py-2">
+                                    <div class="icheck-material-white">
+                                        <input type="checkbox" id="user-checkbox1" checked=""/>
+                                        <label for="user-checkbox1">I Agree Terms & Conditions</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-light btn-round px-5"><i
+                                            class="zmdi zmdi-account-add"></i> Register
+                                    </button>
+                                    <button type="reset" class="btn btn-light btn-round px-5"><i
+                                            class="zmdi zmdi-spinner"></i> Reset
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Tao account player-->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">Player</div>
+                            <hr>
+                            <form th:action="@{/player/save-player}" th:object="${player}" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="input-12">Name</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-12"
+                                           placeholder="Enter Your Name" th:field="*{name}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-13">Email</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-13"
+                                           placeholder="Enter Your Email Address" th:field="*{gmail}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-14">Date of Birth</label>
+                                    <input type="date" class="form-control form-control-rounded" id="input-14"
+                                           placeholder="Enter Your Date of Birth" th:field="*{birthday}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-15">Country</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-15"
+                                           placeholder="Enter Your Country" th:field="*{country}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-16">Height</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-16"
+                                           placeholder="Enter Your Height" th:field="*{height}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-17">Weight</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-17"
+                                           placeholder="Enter Your Weight" th:field="*{weight}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-18">Salary</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-18"
+                                           placeholder="Enter Your Salary"  th:field="*{salary}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-19">Bonus</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-19"
+                                           placeholder="Enter Your Bonus" th:field="*{bonus}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-20">Introduction</label>
+                                    <textarea class="form-control form-control-rounded" id="input-20" cols="30" rows="3"
+                                              placeholder="Enter Your Introduction" th:field="*{introduction}">
+                                    </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-21">Avatar</label>
+                                    <input type="file" class="form-control form-control-rounded" id="input-21"
+                                           placeholder="Enter Your Avatar" th:field="*{avaFile}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-23">BackGround</label>
+                                    <input type="file" class="form-control form-control-rounded" id="input-23"
+                                           placeholder="Enter Your BackGround" th:field="*{backGroundFile}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-24">Position</label>
+                                    <select th:field="*{position}" id="input-24" class="form-control form-control-rounded">
+                                        <option th:each="pos : ${position}" th:value="${pos.id}" th:text="${pos.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-25">Performance</label>
+                                    <select th:field="*{performance}" id="input-25" class="form-control form-control-rounded">
+                                        <option th:each="per : ${performance}" th:value="${per.id}" th:text="${per.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-26">Status</label>
+                                    <select th:field="*{status}" id="input-26" class="form-control form-control-rounded">
+                                        <option th:each="s : ${status}" th:value="${s.id}" th:text="${s.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-27">Password</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-27"
+                                           placeholder="Enter Your Password" th:field="*{password}">
+                                </div>
+                                <div class="form-group py-2">
+                                    <div class="icheck-material-white">
+                                        <input type="checkbox" id="user-checkbox2" checked=""/>
+                                        <label for="user-checkbox2">I Agree Terms & Conditions</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-light btn-round px-5"><i
+                                            class="zmdi zmdi-account-add"></i> Register
+                                    </button>
+                                    <button type="reset" class="btn btn-light btn-round px-5"><i
+                                            class="zmdi zmdi-spinner"></i> Reset
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!--End Row-->
+
+            <!--start overlay-->
+            <div class="overlay toggle-menu"></div>
+            <!--end overlay-->
+
+        </div>
+        <!-- End container-fluid-->
+
+    </div><!--End content-wrapper-->
+
+    <!--start color switcher-->
+    <div class="right-sidebar">
+        <div class="switcher-icon">
+            <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
+        </div>
+        <div class="right-sidebar-content">
+
+            <p class="mb-0">Gaussion Texture</p>
+            <hr>
+
+            <ul class="switcher">
+                <li id="theme1"></li>
+                <li id="theme2"></li>
+                <li id="theme3"></li>
+                <li id="theme4"></li>
+                <li id="theme5"></li>
+                <li id="theme6"></li>
+                <li id="theme7"></li>
+                <li id="theme8"></li>
+                <li id="theme9"></li>
+                <li id="theme10"></li>
+                <li id="theme11"></li>
+                <li id="theme12"></li>
+                <li id="theme13"></li>
+                <li id="theme14"></li>
+            </ul>
+
+        </div>
+    </div>
+    <!--end color switcher-->
+
+</div><!--End wrapper-->
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- simplebar js -->
+<script src="assets/plugins/simplebar/js/simplebar.js"></script>
+<!-- sidebar-menu js -->
+<script src="assets/js/sidebar-menu.js"></script>
+
+<!-- Custom scripts -->
+<script src="assets/js/app-script.js"></script>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous">
+</script>
+<script>
+    $(function () {
+        $("#_wrapper_footer").load("_Wrapper_Footer.html");
+        $("#_header").load("_Header.html");
+    });
+</script>
+
+</body>
+</html>

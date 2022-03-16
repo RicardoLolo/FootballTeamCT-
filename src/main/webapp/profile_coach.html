@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
+    <!-- loader-->
+    <link href="assets/css/pace.min.css" rel="stylesheet"/>
+    <script src="assets/js/pace.min.js"></script>
+    <!--favicon-->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <!-- simplebar CSS-->
+    <link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
+    <!-- Bootstrap core CSS-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- animate CSS-->
+    <link href="assets/css/animate.css" rel="stylesheet" type="text/css"/>
+    <!-- Icons CSS-->
+    <link href="assets/css/icons.css" rel="stylesheet" type="text/css"/>
+    <!-- Sidebar CSS-->
+    <link href="assets/css/sidebar-menu.css" rel="stylesheet"/>
+    <!-- Custom Style-->
+    <link href="assets/css/app-style.css" rel="stylesheet"/>
+
+</head>
+
+<body class="bg-theme bg-theme3">
+
+<!-- start loader -->
+<!--<div id="pageloader-overlay" class="visible incoming">-->
+<!--    <div class="loader-wrapper-outer">-->
+<!--        <div class="loader-wrapper-inner">-->
+<!--            <div class="loader"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!-- end loader -->
+
+<!-- Start wrapper-->
+<div id="wrapper">
+
+    <div id="_wrapper_footer"></div>
+
+    <header id="_header"></header>
+
+    <div class="clearfix"></div>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+
+            <div class="row mt-3">
+                <div class="col-lg-4">
+                    <div class="card profile-card-2">
+                        <div class="card-img-block">
+                            <img class="img-fluid" src="https://via.placeholder.com/800x500" alt="Card image cap">
+                        </div>
+                        <div class="card-body pt-5">
+                            <img src="https://via.placeholder.com/110x110" alt="profile-image" class="profile">
+                            <h5 class="card-title">Mark Stern</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <div class="icon-block">
+                                <a href="https://www.facebook.com" target="_blank"><i
+                                        class="fa fa-facebook bg-facebook text-white"></i></a>
+                                <a href="https://twitter.com/twitter" target="_blank"> <i
+                                        class="fa fa-twitter bg-twitter text-white"></i></a>
+                                <a href="https://www.google.com/" target="_blank"> <i class="zmdi zmdi-google"></i></a>
+                                <a href="https://github.com/" target="_blank"> <i class="zmdi zmdi-github-alt"></i></a>
+                                <a href="https://www.youtube.com/" target="_blank"> <i
+                                        class="zmdi zmdi-youtube-play"></i></a>
+                                <a href="https://www.twitch.tv/" target="_blank"> <i class="zmdi zmdi-twitch"></i></a>
+                                <a href="https://mail.google.com/" target="_blank"> <i
+                                        class="zmdi zmdi-outlook"></i></a>
+                                <a href="https://myaccount.google.com/" target="_blank"> <i
+                                        class="zmdi zmdi-google-plus"></i></a>
+                                <a href="https://web.whatsapp.com/" target="_blank"> <i class="zmdi zmdi-whatsapp"></i></a>
+                                <a href="https://yahoo.com/" target="_blank"> <i class="zmdi zmdi-yahoo"></i></a>
+                                <a href="https://www.pinterest.com/" target="_blank"> <i
+                                        class="zmdi zmdi-pinterest"></i></a>
+                                <a href="https://www.playstation.com/" target="_blank"> <i
+                                        class="zmdi zmdi-playstation"></i></a>
+                                <a href="https://www.xbox.com/" target="_blank"> <i class="zmdi zmdi-xbox"></i></a>
+                                <a href="https://www.amazon.com/" target="_blank"> <i class="zmdi zmdi-amazon"></i></a>
+                                <a href="https://www.netflix.com/vn/title/80013872?source=35" target="_blank"> <i
+                                        class="zmdi zmdi-attachment-alt"></i></a>
+                                <a href="https://www.paypal.com/" target="_blank"> <i class="zmdi zmdi-paypal"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
+                                <li class="nav-item">
+                                    <a href="#" data-target="#profile" data-toggle="pill" class="nav-link active"><i
+                                            class="icon-user"></i> <span class="hidden-xs">Profile</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" data-target="#edit" data-toggle="pill" class="nav-link"><i
+                                            class="icon-note"></i> <span class="hidden-xs">Edit</span></a>
+                                </li>
+                            </ul>
+                            <div class="tab-content p-3">
+                                <div class="tab-pane active" id="profile">
+                                    <h5 class="mb-3">User Profile</h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>About</h6>
+                                            <p>
+                                                Web Designer, UI/UX Engineer
+                                            </p>
+                                            <h6>Hobbies</h6>
+                                            <p>
+                                                Indie music, skiing and hiking. I love the great outdoors.
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Recent badges</h6>
+                                            <a href="#" class="badge badge-dark badge-pill">html5</a>
+                                            <a href="#" class="badge badge-dark badge-pill">react</a>
+                                            <a href="#" class="badge badge-dark badge-pill">codeply</a>
+                                            <a href="#" class="badge badge-dark badge-pill">angularjs</a>
+                                            <a href="#" class="badge badge-dark badge-pill">css3</a>
+                                            <a href="#" class="badge badge-dark badge-pill">jquery</a>
+                                            <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
+                                            <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
+                                            <hr>
+                                            <span class="badge badge-primary"><i
+                                                    class="fa fa-user"></i> 900 Followers</span>
+                                            <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
+                                            <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h5 class="mt-2 mb-3"><span
+                                                    class="fa fa-clock-o ion-clock float-right"></span> Recent Activity
+                                            </h5>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-striped">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Skell</strong> deleted his post Look at Why this
+                                                            is.. in <strong>`Discussions`</strong>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/row-->
+                                </div>
+                                <!--                </div>-->
+                                <div class="tab-pane" id="edit">
+                                    <form th:action="@{/coach/{id}(id=${coach.id})}" th:object="${coach}" method="post" enctype="multipart/form-data">
+                                        <label hidden>Id:
+                                            <input type="text" name="id" th:field="*{id}">
+                                        </label>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Name</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" name="name" th:field="*{name}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="email" name="email" th:field="*{gmail}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Date of Birth</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="date" name="birthday" th:field="*{birthday}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Country</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" name="country" th:field="*{country}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Salary</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" name="salary" th:field="*{salary}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Bonus</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" name="bonus" th:field="*{bonus}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Introduction</label>
+                                            <div class="col-lg-9">
+                                                <!--                                                <input class="form-control" type="text" name="introduction" th:field="*{introduction}">-->
+                                                <textarea class="form-control" cols="30" rows="3" name="introduction"
+                                                          th:field="*{introduction}">
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Avatar</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="file" th:field="*{avaFile}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">BackGround</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="file" th:field="*{backGroundFile}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Coach Type</label>
+                                            <div class="col-lg-9">
+                                                <select th:field="*{coachType}" class="form-control">
+                                                    <option th:each="coa : ${coachType}" th:value="${coa.id}" th:selected="${coa.id} == *{coachType.id}">
+                                                        <span th:text="${coa.name}"></span>
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Password</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" name="password" th:field="*{password}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label"></label>
+                                            <div class="col-lg-9">
+                                                <button type="submit" class="btn btn-light btn-round px-5"><i
+                                                        class="zmdi zmdi-account"></i> Update
+                                                </button>
+                                                <button type="reset" class="btn btn-light btn-round px-5"><i
+                                                        class="zmdi zmdi-spinner"></i> Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--start overlay-->
+            <div class="overlay toggle-menu"></div>
+            <!--end overlay-->
+
+        </div>
+        <!-- End container-fluid-->
+    </div><!--End content-wrapper-->
+
+    <!--start color switcher-->
+    <div class="right-sidebar">
+        <div class="switcher-icon">
+            <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
+        </div>
+        <div class="right-sidebar-content">
+
+            <p class="mb-0">Gaussion Texture</p>
+            <hr>
+            <ul class="switcher">
+                <li id="theme1"></li>
+                <li id="theme2"></li>
+                <li id="theme3"></li>
+                <li id="theme4"></li>
+                <li id="theme5"></li>
+                <li id="theme6"></li>
+                <li id="theme7"></li>
+                <li id="theme8"></li>
+                <li id="theme9"></li>
+                <li id="theme10"></li>
+                <li id="theme11"></li>
+                <li id="theme12"></li>
+                <li id="theme13"></li>
+                <li id="theme14"></li>
+            </ul>
+
+        </div>
+    </div>
+    <!--end color switcher-->
+
+</div><!--End wrapper-->
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- simplebar js -->
+<script src="assets/plugins/simplebar/js/simplebar.js"></script>
+<!-- sidebar-menu js -->
+<script src="assets/js/sidebar-menu.js"></script>
+
+<!-- Custom scripts -->
+<script src="assets/js/app-script.js"></script>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous">
+</script>
+<script>
+    $(function () {
+        $("#_wrapper_footer").load("_Wrapper_Footer.html");
+        $("#_header").load("_Header.html");
+    });
+</script>
+
+</body>
+</html>

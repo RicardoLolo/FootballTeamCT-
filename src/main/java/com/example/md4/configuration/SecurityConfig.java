@@ -61,8 +61,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/api/auth")
                 .hasAnyAuthority("ADMIN")
-                .anyRequest()
-                .authenticated()
+                .anyRequest().authenticated()
+
+
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
