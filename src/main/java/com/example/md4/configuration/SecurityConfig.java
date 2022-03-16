@@ -25,10 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private IAccountService accountService;
 
     @Autowired
-    private RestAuthenticationEntryPoint jwtEntryPoint;
+    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     @Bean
-    public JwtAuthenticationFilter jwtTokenFilter() {
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
     }
 
@@ -52,20 +52,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers("/","/api/login").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/","/api/login",
+                        "/index/**",
+                        "/calendar/**",
+                        "/icons/**",
+                        "/tables/**").permitAll()
                 .antMatchers("/api/forms").hasAnyAuthority("Role_Admin")
                 .antMatchers("/profile_player").hasAnyAuthority("Role_Player")
                 .antMatchers("/profile_coach").hasAnyAuthority("Role_Coach")
+                .anyRequest().authenticated()
+
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint(jwtEntryPoint)
+                .authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
+
