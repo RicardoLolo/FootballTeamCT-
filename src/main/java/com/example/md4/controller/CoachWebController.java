@@ -98,11 +98,12 @@ public class CoachWebController {
         }
         coachEdit.setId(coach.get().getId());
         coachEdit = iCoachService.save(coachEdit);
+        Coach editCoach = iCoachRepository.editCoach();
         Account account = new Account();
-        account.setGmail(coachEdit.getGmail());
-        account.setPassword(passwordEncoder.encode(coachEdit.getPassword()));
-        account.setCoach(iCoachService.findOne(coachEdit.getId()).get());
-        account.setRoles((Set<Role>) roleService.findByName("COACH"));
+        account.setGmail(editCoach.getGmail());
+        account.setPassword(passwordEncoder.encode(editCoach.getPassword()));
+        account.setCoach(iCoachService.findOne(editCoach.getId()).get());
+//        account.setRoles((Set<Role>) roleService.findByName("COACH"));
         accountService.save(account);
         return new ResponseEntity<>(coachEdit, HttpStatus.OK);
     }
