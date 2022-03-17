@@ -9,6 +9,8 @@ import com.example.md4.repository.IPlayerRepository;
 import com.example.md4.repository.IPositionRepository;
 import com.example.md4.repository.IStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -69,5 +71,10 @@ public class PlayerServiceImpl implements IPlayerService {
     @Override
     public Iterable<Player> findAllByName(String name) {
         return playerRepository.findAllByNameContaining(name);
+    }
+
+    @Override
+    public Page<Player> findPage(Pageable pageable) {
+        return playerRepository.findAll(pageable);
     }
 }

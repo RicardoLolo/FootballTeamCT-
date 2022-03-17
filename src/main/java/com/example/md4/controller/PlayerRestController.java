@@ -6,6 +6,9 @@ import com.example.md4.service.player.IPlayerService;
 import com.example.md4.service.role.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -111,5 +114,14 @@ public class PlayerRestController {
             new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(players, HttpStatus.OK);
+    }
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<Player>> showAllPage(@PageableDefault(value = 2) Pageable pageable) {
+        Page<Player> playerPage = playerService.findPage(pageable);
+        if (!playerPage.iterator().hasNext()) {
+            new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(playerPage, HttpStatus.OK);
     }
 }
