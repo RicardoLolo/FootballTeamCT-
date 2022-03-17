@@ -25,11 +25,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private IAccountService accountService;
 
     @Autowired
-    private JwtEntryPoint jwtEntryPoint;
+    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     @Bean
-    public JwtTokenFilter jwtTokenFilter() {
-        return new JwtTokenFilter();
+    public JwtAuthenticationFilter jwtTokenFilter() {
+        return new JwtAuthenticationFilter();
     }
 
     @Override
@@ -57,43 +57,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers("/static/**",
-                        "/login",
-                        "/api/login",
-                        "/api/test")
-                .permitAll()
-                .antMatchers("/api/auth/hello")
-                .hasAnyAuthority("ADMIN")
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/","/api/login",
+                        "/index/**",
+                        "/calendar/**",
+                        "/icons/**",
+                        "/tables/**").permitAll()
+                .antMatchers("/api/forms").hasAnyAuthority("Role_Admin")
+                .antMatchers("/profile_player").hasAnyAuthority("Role_Player", "Role_Admin")
+                .antMatchers("/api/coaches/**").hasAnyAuthority("Role_Coach", "Role_Admin")
+                .anyRequest().authenticated()
+
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint(jwtEntryPoint)
+                .authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
-        //        http.csrf().ignoringAntMatchers("/**");
-//        http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
-//        http.authorizeRequests()
-//                .antMatchers("/static/**",
-//                        "/css/**",
-//                        "/js/**",
-//                        "/login",
-//                        "/api/login").permitAll()
-//                .antMatchers("/api/use/**").hasAnyAuthority("ROLE_PLAYER")
-//                .anyRequest().authenticated()
-//                .and()
-//                    .logout().permitAll()
-//                .and().csrf().disable();
-//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-//                .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
-//        http.sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        http.cors();
     }
 }
