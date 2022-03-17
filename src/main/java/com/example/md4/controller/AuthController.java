@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin("*")
@@ -40,16 +42,16 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Account account) {
-        if (!accountService.findAccountByGmailAndPassword(account.getGmail(), account.getPassword()).isPresent()){
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
+        if (!accountService.findAccountByGmailAndPassword(account.getGmail(), account.getPassword()).isPresent()) {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwt = jwtService.generateTokenLogin(authentication);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        Account currentUser = accountService.findByGmail(account.getGmail()).get();
-        return ResponseEntity.ok(new JwtResponse(currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+            String jwt = jwtService.generateTokenLogin(authentication);
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            Account currentUser = accountService.findByGmail(account.getGmail()).get();
+            return ResponseEntity.ok(new JwtResponse(currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getAuthorities()));
         }
         return (ResponseEntity<?>) ResponseEntity.notFound();
     }
@@ -60,8 +62,19 @@ public class AuthController {
         return ResponseEntity.ok(roles);
     }
 
-    @GetMapping("/test")
-    public ModelAndView test(){
-        return new ModelAndView("index");
+//    @GetMapping("/test")
+//    public ModelAndView test() {
+//        return new ModelAndView("index");
+//    }
+
+    @PostConstruct
+    public void init() {
+        List<Account> accounts = (List<Account>) accountService.findAll();
+        if (accounts.isEmpty()) {
+            Account account = new Account();
+            account.setGmail("loloringo9999@gmail.com");
+            account.setPassword(passwordEncoder.encode("Lolomomo"));
+            accountService.save(account);
+        }
     }
 }
