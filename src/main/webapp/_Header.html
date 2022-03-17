@@ -24,9 +24,8 @@
     <link href="assets/css/sidebar-menu.css" rel="stylesheet"/>
     <!-- Custom Style-->
     <link href="assets/css/app-style.css" rel="stylesheet"/>
-
 </head>
-<body>
+<body class="bg-theme bg-theme3">
 
 <!--Start topbar header-->
 <header class="topbar-nav">
@@ -41,18 +40,14 @@
 
         <ul class="navbar-nav align-items-center right-nav-link">
             <li class="nav-item dropdown-lg">
-                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
-                   href="#">
-                    <i class="fa fa-envelope-open-o"></i></a>
-            </li>
-            <li class="nav-item dropdown-lg">
-                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
-                   href="#">
-                    <i class="fa fa-bell-o"></i></a>
+                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="#">
+                    <i class="fa fa-envelope-open-o text-success"></i>
+                </a>
             </li>
             <li class="nav-item language">
-                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
-                   href="#"><i class="fa fa-flag"></i></a>
+                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="#">
+                    <i class="fa fa-flag text-info"></i>
+                </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li class="dropdown-item"><i class="flag-icon flag-icon-gb mr-2"></i> English</li>
                     <li class="dropdown-item"><i class="flag-icon flag-icon-fr mr-2"></i> French</li>
@@ -68,7 +63,7 @@
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li class="dropdown-item user-details">
                         <a href="#">
-                            <div class="media">
+                            <div class="media" onclick="profile()">
                                 <div class="avatar"><img class="align-self-start mr-3"
                                                          src="https://via.placeholder.com/110x110"
                                                          alt="user avatar"></div>
@@ -80,13 +75,13 @@
                         </a>
                     </li>
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
+                    <li class="dropdown-item" onclick="forms_mail()"><i class="icon-envelope mr-2"></i> Inbox</li>
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
+                    <li class="dropdown-item" onclick="forms_calender()"><i class="icon-wallet mr-2"></i> Event New</li>
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item text-danger"><i class="icon-power mr-2"></i> Logout</li>
+                    <li class="dropdown-item text-danger" onclick="logout()"><i class="icon-power mr-2"></i> Logout</li>
                 </ul>
             </li>
         </ul>
@@ -94,17 +89,114 @@
 </header>
 <!--End topbar header-->
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+<div class="content-wrapper" id="forms_calender" hidden>
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Event</div>
+                        <hr>
+                        <form>
+                            <div class="form-group" id="error_from_calendar"></div>
+                            <div class="form-group">
+                                <label for="title-new">Event Title</label>
+                                <input type="text" class="form-control form-control-rounded" id="title-new"
+                                       placeholder="Enter Your Event Title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="url-new">Event Url</label>
+                                <input type="text" class="form-control form-control-rounded" id="url-new"
+                                       placeholder="Enter Your Event Url">
+                            </div>
+                            <div class="form-group">
+                                <label for="date-start">Date Start</label>
+                                <input type="datetime-local" class="form-control form-control-rounded" id="date-start" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="date-finish">Date Finish</label>
+                                <input type="datetime-local" class="form-control form-control-rounded" id="date-finish" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-light btn-round px-5" onclick="save_calendar()" id="form-calendar">
+                                    <i class="zmdi zmdi-account-add"></i> Register
+                                </button>
+                                <button type="reset" class="btn btn-light btn-round px-5"><i
+                                        class="zmdi zmdi-spinner"></i> Reset
+                                </button>
+                                <button type="reset" class="btn btn-light btn-round px-5" onclick="forms_calender()"><i
+                                        class="zmdi zmdi-block"></i> Block
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+</div>
 
-    <!-- simplebar js -->
-    <script src="assets/plugins/simplebar/js/simplebar.js"></script>
-    <!-- sidebar-menu js -->
-    <script src="assets/js/sidebar-menu.js"></script>
+<div class="content-wrapper" id="forms_mail" hidden>
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">MAIL</div>
+                        <hr>
+                        <form>
+                            <div class="form-group" id="error_from_email"></div>
+                            <div class="form-group">
+                                <label for="your-email">Your Email</label>
+                                <input type="text" class="form-control form-control-rounded" id="your-email"
+                                       placeholder="Enter Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email-new">The Recipient's Email</label>
+                                <input type="text" class="form-control form-control-rounded" id="email-new"
+                                       placeholder="Enter The Recipient's Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-new">Enter a Message</label>
+                                <textarea id="message-new" placeholder="Enter Your" class="form-control form-control-rounded" cols="30" rows="3">
+                                </textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-light btn-round px-5" onclick=""><i
+                                        class="zmdi zmdi-account-add"></i> Send
+                                </button>
+                                <button type="reset" class="btn btn-light btn-round px-5"><i
+                                        class="zmdi zmdi-spinner"></i> Reset
+                                </button>
+                                <button type="reset" class="btn btn-light btn-round px-5" onclick="forms_mail()"><i
+                                        class="zmdi zmdi-block"></i> Block
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+</div>
 
-    <!-- Custom scripts -->
-    <script src="assets/js/app-script.js"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- simplebar js -->
+<script src="assets/plugins/simplebar/js/simplebar.js"></script>
+<!-- sidebar-menu js -->
+<script src="assets/js/sidebar-menu.js"></script>
+
+<!-- Custom scripts -->
+<script src="assets/js/app-script.js"></script>
+
+<script src="JSMD4/_Header.js"></script>
 </body>
 </html>

@@ -57,10 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers("/static/**",
-                        "/login",
+                .antMatchers("/webapp/**",
                         "/api/login",
-                        "/api/test")
+                        "/api/calendar/**")
                 .permitAll()
                 .antMatchers("/api/auth/hello")
                 .hasAnyAuthority("ADMIN")
@@ -68,7 +67,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .permitAll()
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtEntryPoint)
@@ -76,24 +76,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
-        //        http.csrf().ignoringAntMatchers("/**");
-//        http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
-//        http.authorizeRequests()
-//                .antMatchers("/static/**",
-//                        "/css/**",
-//                        "/js/**",
-//                        "/login",
-//                        "/api/login").permitAll()
-//                .antMatchers("/api/use/**").hasAnyAuthority("ROLE_PLAYER")
-//                .anyRequest().authenticated()
-//                .and()
-//                    .logout().permitAll()
-//                .and().csrf().disable();
-//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-//                .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
-//        http.sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        http.cors();
     }
 }

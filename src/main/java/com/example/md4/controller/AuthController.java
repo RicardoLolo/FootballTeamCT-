@@ -60,8 +60,8 @@ public class AuthController {
         return ResponseEntity.ok(roles);
     }
 
-    @GetMapping("/test")
-    public ModelAndView test(){
-        return new ModelAndView("index");
-    }
+//    @GetMapping("/logout")
+//    public ResponseEntity<?> logout(){
+//        ResponseEntity<?> ResponseEntity;
+//    }
 }
