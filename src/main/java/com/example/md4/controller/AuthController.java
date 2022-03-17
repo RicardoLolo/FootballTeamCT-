@@ -15,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
@@ -60,8 +59,4 @@ public class AuthController {
         return ResponseEntity.ok(roles);
     }
 
-    @GetMapping("/test")
-    public ModelAndView test(){
-        return new ModelAndView("index");
-    }
 }

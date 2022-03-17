@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -26,13 +26,11 @@
             let gmail = $('#exampleInputUsername').val();
             let password = $('#exampleInputPassword').val();
             if (gmail === "") {
-                document.getElementById("error").innerHTML = "Gmail address cannot be blank !";
-                event.preventDefault();
+                document.getElementById("error_login").innerHTML = "Gmail address cannot be blank !";
                 return false;
             }
             if (password === "") {
-                document.getElementById("error").innerHTML = "Password can not be blank !";
-                event.preventDefault();
+                document.getElementById("error_login").innerHTML = "Password can not be blank !";
                 return false;
             }
             let data = {
@@ -49,13 +47,12 @@
                 data: JSON.stringify(data),
                 success: function (data) {
                     if (data.status === 202) {
-                        document.getElementById("error").innerHTML = "Email name or password is incorrect !"
+                        document.getElementById("error_login").innerHTML = "Email name or password is incorrect !"
                         return false;
                     } else {
-                        document.getElementById("error").innerHTML = data.email + ": " + data.token ;
                         localStorage.setItem("token", data.token);
                         localStorage.setItem("currentUser", JSON.stringify(data));
-                        window.location.href = "index.html"
+                        window.location.href = "index.html";
                     }
                 }
             });
@@ -91,10 +88,9 @@
         <div class="card-body">
             <div class="card-content p-2">
                 <div class="text-center">
-                    <img src="assets/images/logo-icon.png" alt="logo icon">
+                    <img src="assets/images/angry_top_ball.png" width="150px" height="150px" alt="logo icon">
                 </div>
-                <div class="card-title text-uppercase text-center py-3">Sign In</div>
-                <div class="card-title text-uppercase text-center py-3" id="error"></div>
+                <div class="card-title text-uppercase text-center py-3" id="error_login">Sign In</div>
                 <form>
                     <div class="form-group">
                         <label for="exampleInputUsername" class="sr-only">Username</label>
@@ -130,7 +126,7 @@
 <!--                    <button  class="btn btn-light btn-block"-->
 <!--                            onclick="signin()">Sign In-->
 <!--                    </button>-->
-                    <input class="btn btn-light btn-block" onclick="login()" type="button" value="Sign In">
+                    <input class="btn btn-light btn-block" onclick="login()" type="submit" value="Sign In">
                     <div class="text-center mt-3">Sign In With</div>
 
                     <div class="form-row mt-4">

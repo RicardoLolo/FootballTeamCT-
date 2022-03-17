@@ -31,13 +31,13 @@
 
 <body class="bg-theme bg-theme3">
 <!-- start loader -->
-<!--<div id="pageloader-overlay" class="visible incoming">-->
-<!--    <div class="loader-wrapper-outer">-->
-<!--        <div class="loader-wrapper-inner">-->
-<!--            <div class="loader"></div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div id="pageloader-overlay" class="visible incoming">
+    <div class="loader-wrapper-outer">
+        <div class="loader-wrapper-inner">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
 <!-- end loader -->
 
 <!-- Start wrapper-->
@@ -220,39 +220,22 @@
                 <div class="col-12 col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            Recent Order Tables
+                            Today's Event
                         </div>
                         <div class="table-responsive">
                             <table class="table align-items-center table-flush table-borderless">
                                 <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Photo</th>
-                                    <th>Product ID</th>
-                                    <th>Amount</th>
-                                    <th>Date</th>
-                                    <th>Shipping</th>
-                                </tr>
+                                    <th>Title Event Name</th>
+                                    <th>Url Event</th>
+                                    <th>Date Event</th>
+                                    <th>Action</th>
+                                    </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Iphone 5</td>
-                                    <td><img src="https://via.placeholder.com/110x110" class="product-img"
-                                             alt="product img"></td>
-                                    <td>#9405822</td>
-                                    <td>$ 1250.00</td>
-                                    <td>03 Aug 2017</td>
-                                    <td>
-                                        <div class="progress shadow" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 90%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                                <tbody id="CalenderTodayList">
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                     <!--         map-->
                     <div class="row">
@@ -349,5 +332,7 @@
     });
 </script>
 
+<script src="JSMD4/_Header.js"></script>
+<script src="JSMD4/index.js"></script>
 </body>
 </html>
