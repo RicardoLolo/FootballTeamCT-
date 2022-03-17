@@ -24,6 +24,12 @@
     <link href="assets/css/sidebar-menu.css" rel="stylesheet"/>
     <!-- Custom Style-->
     <link href="assets/css/app-style.css" rel="stylesheet"/>
+    <script>
+        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        function profile(){
+            window.location.href = "profile_coach.html"
+        }
+    </script>
 
 </head>
 <body>
@@ -82,7 +88,7 @@
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
+                    <li class="dropdown-item" onclick="profile()"><i class="icon-wallet mr-2"></i> Account</li>
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
                     <li class="dropdown-divider"></li>

@@ -18,6 +18,13 @@ public class CoachService implements ICoachService {
     @Autowired
     private ICoachTypeRepository coachTypeRepository;
 
+
+    @Override
+    public Coach findCoachLast(Long id) {
+        coachRepository.findById(id);
+        return null;
+    }
+
     @Override
     public Iterable<Coach> findAll() {
         return coachRepository.findAll();
@@ -30,7 +37,7 @@ public class CoachService implements ICoachService {
 
     @Override
     public Coach save(Coach coach) {
-       return coachRepository.save(coach);
+        return coachRepository.save(coach);
 
     }
 
@@ -44,9 +51,10 @@ public class CoachService implements ICoachService {
         return coachTypeRepository.findAll();
     }
 
+
     @Override
     public Iterable<Coach> findAllByName(String name) {
-       return coachRepository.findAllByNameContaining(name);
+        return coachRepository.findAllByNameContaining(name);
     }
 
     @Override

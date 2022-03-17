@@ -13,8 +13,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin("*")
@@ -33,8 +37,12 @@ public class AuthController {
     @Autowired
     private IRoleService roleService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Account account) {
+        if (!accountService.findAccountByGmailAndPassword(account.getGmail(), account.getPassword()).isPresent()){
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
 
@@ -42,8 +50,10 @@ public class AuthController {
 
         String jwt = jwtService.generateTokenLogin(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        Account currentUser = accountService.findByUsername(account.getGmail()).get();
-        return ResponseEntity.ok(new JwtResponse(currentUser.getId(),jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+        Account currentUser = accountService.findByGmail(account.getGmail()).get();
+        return ResponseEntity.ok(new JwtResponse(currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+        }
+        return (ResponseEntity<?>) ResponseEntity.notFound();
     }
 
     @GetMapping("/role/{id}")
@@ -51,4 +61,20 @@ public class AuthController {
         Optional<Role> roles = roleService.findById(id);
         return ResponseEntity.ok(roles);
     }
+
+    @GetMapping("/test")
+    public ModelAndView test(){
+        return new ModelAndView("index");
+    }
+    @PostConstruct
+    public void init() {
+        List<Account> accounts = (List<Account>) accountService.findAll();
+        if (accounts.isEmpty()) {
+            Account account = new Account();
+            account.setGmail("abc@gmail.com");
+            account.setPassword(passwordEncoder.encode("1234abc"));
+            accountService.save(account);
+        }
+    }
+
 }

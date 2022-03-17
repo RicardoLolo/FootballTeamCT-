@@ -26,7 +26,10 @@
     <link href="assets/css/sidebar-menu.css" rel="stylesheet"/>
     <!-- Custom Style-->
     <link href="assets/css/app-style.css" rel="stylesheet"/>
+    <script>
+        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
+    </script>
 </head>
 
 <body class="bg-theme bg-theme3">
@@ -63,48 +66,45 @@
         <li>
             <a href="calendar.html">
                 <i class="zmdi zmdi-calendar-check text-info"></i> <span>Calendar</span>
-<!--                <small class="badge float-right badge-light">New</small>-->
+                <!--                <small class="badge float-right badge-light">New</small>-->
             </a>
         </li>
 
         <li>
-            <a href="profile_player.html">
+            <a href="profile_player.html" hidden>
                 <i class="zmdi zmdi-face text-success"></i> <span>Profile Player</span>
             </a>
         </li>
 
         <li>
-            <a href="profile_coach.html">
+            <a href="profile_coach.html" hidden>
                 <i class="zmdi zmdi-account-circle text-success"></i> <span>Profile Coach</span>
             </a>
         </li>
 
-<!--        <li>-->
-<!--            <a href="login.html" target="_blank">-->
-<!--                <i class="zmdi zmdi-lock"></i> <span>Login</span>-->
-<!--            </a>-->
-<!--        </li>-->
-
-<!--        <li>-->
-<!--            <a href="register.html" target="_blank">-->
-<!--                <i class="zmdi zmdi-account-circle"></i> <span>Registration</span>-->
-<!--            </a>-->
-<!--        </li>-->
-
-<!--        <li class="sidebar-header">LABELS</li>-->
         <li>
-            <a href="https://www.highlandscoffee.com.vn/">
+            <a href="https://www.highlandscoffee.com.vn/" target="_blank">
                 <i class="zmdi zmdi-coffee text-danger"></i> <span>Coffee</span>
             </a>
         </li>
 
         <li>
-            <a href="icons.html">
+            <a href="icons.html" target="_blank">
                 <i class="zmdi zmdi-invert-colors text-info"></i> <span>UI Icons</span>
             </a>
         </li>
-<!--        <li><a href="#"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a></li>-->
-<!--        <li><a href="#"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li>-->
+
+        <li>
+            <a href="#"><i class="zmdi zmdi-chart-donut text-success">
+                </i> <span>Warning</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="#"><i class="zmdi zmdi-share text-info">
+                </i> <span>Information</span>
+            </a>
+        </li>
 
     </ul>
 
@@ -121,7 +121,7 @@
 <footer class="footer">
     <div class="container">
         <div class="text-center">
-             © 2022 Football Club
+            © 2022 Football Club
         </div>
     </div>
 </footer>
