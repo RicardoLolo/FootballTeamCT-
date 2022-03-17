@@ -20,16 +20,16 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private IAccountService accountService;
 
     @Autowired
-    private JwtEntryPoint jwtEntryPoint;
+    private RestAuthenticationEntryPoint jwtEntryPoint;
 
     @Bean
-    public JwtTokenFilter jwtTokenFilter() {
-        return new JwtTokenFilter();
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter();
     }
 
     @Override
@@ -56,25 +56,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers("/webapp/**",
-                        "/api/login",
-                        "/api/calendar/**")
-                .permitAll()
-                .antMatchers("/api/auth/hello")
-                .hasAnyAuthority("ADMIN")
-                .anyRequest()
-                .authenticated()
+        http.authorizeRequests().antMatchers("/index/**",
+                        "/calendar/**",
+                        "/icons/**",
+                        "/tables/**").permitAll()
+                .and().authorizeRequests()
+                .antMatchers("/forms**").hasRole("ADMIN")
+                .and().authorizeRequests()
+                .antMatchers("/profile_player**").hasRole("PLAYER")
+                .and().authorizeRequests()
+                .antMatchers("/profile_coach**").hasRole("COACH ")
                 .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .permitAll()
+                .formLogin().loginPage("/login").permitAll().successHandler(new CustomSuccessHandler())
+                .and()
+                .csrf().disable().exceptionHandling().accessDeniedPage("/accessDenied")
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtEntryPoint)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
