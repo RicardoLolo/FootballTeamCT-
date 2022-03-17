@@ -9,8 +9,7 @@ import org.springframework.data.jdbc.repository.query.Query;
 import java.util.Optional;
 
 public interface ICoachService {
-    @Query(value = "select * from coach as c order c.id desc limit 1, nativeQuery = true")
-    Coach findCoachLast(Long id);
+
 
     Iterable<Coach> findAll();
 
@@ -25,6 +24,5 @@ public interface ICoachService {
     Iterable<Coach> findAllByName(String name);
 
     Page<Coach> findPage(Pageable pageable);
-
 
 }

@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
@@ -37,6 +38,8 @@ public class CoachWebController {
     private IRoleService roleService;
     @Autowired
     private IAccountService accountService;
+    @Autowired
+    private ICoachRepository iCoachRepository;
 
 //Lấy list theo database
     @GetMapping
@@ -77,7 +80,7 @@ public class CoachWebController {
     @PostMapping
     public ResponseEntity<Coach> createCoach(@RequestBody Coach coach) {
         Coach coachCreate = iCoachService.save(coach);
-        Coach coachNew = iCoachService.findCoachLast(coach.getId());
+        Coach coachNew = iCoachRepository.findCoachLast();
         Account account = new Account();
         account.setGmail(coachNew.getGmail());
         account.setPassword(passwordEncoder.encode(coachNew.getPassword()));

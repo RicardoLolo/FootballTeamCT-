@@ -7,6 +7,7 @@ import com.example.md4.repository.ICoachTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,12 +19,6 @@ public class CoachService implements ICoachService {
     @Autowired
     private ICoachTypeRepository coachTypeRepository;
 
-
-    @Override
-    public Coach findCoachLast(Long id) {
-        coachRepository.findById(id);
-        return null;
-    }
 
     @Override
     public Iterable<Coach> findAll() {
@@ -61,4 +56,6 @@ public class CoachService implements ICoachService {
     public Page<Coach> findPage(Pageable pageable) {
         return coachRepository.findAll(pageable);
     }
+
+
 }
