@@ -49,30 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.cors().and().csrf().disable().authorizeRequests()
-//                .antMatchers("/main/webapp/","/api/login").permitAll()
-//                .antMatchers("/index/**",
-//                        "/calendar/**",
-//                        "/icons/**",
-//                        "/tables/**").authenticated()
-//                .antMatchers("/api/forms").hasAnyAuthority("ROLE_ADMIN")
-//                .antMatchers("/profile_player").hasAnyAuthority("ROLE_PLAYER")
-//                .antMatchers("/profile_coach").hasAnyAuthority("ROLE_COACH")
-//                .anyRequest().authenticated()
-//                .and()
-//                .logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
-//                .and()
-//                .exceptionHandling()
-//                .authenticationEntryPoint(restAuthenticationEntryPoint)
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/index/**",
