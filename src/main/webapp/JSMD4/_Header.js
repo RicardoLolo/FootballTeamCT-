@@ -1,5 +1,15 @@
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
+let token = localStorage.getItem("token");
+
+role = currentUser.roles[0].authority;
+
+console.log(currentUser);
+
+console.log(token);
+
+console.log(role)
+
 function profile() {
     if (currentUser) {
         window.location.href = "profile_coach.html"
@@ -12,6 +22,9 @@ function profile() {
 function forms_calender(){
     document.getElementById("forms_calender").hidden = !document.getElementById("forms_calender").hidden;
     document.getElementById("forms_mail").hidden = true;
+    document.getElementById("form-calendar").onclick = function () {
+        save_calendar();
+    };
 }
 
 function forms_mail(){
