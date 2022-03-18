@@ -1,6 +1,7 @@
 package com.example.md4.controller;
 
 import com.example.md4.model.*;
+import com.example.md4.repository.IPlayerRepository;
 import com.example.md4.service.Account.IAccountService;
 import com.example.md4.service.player.IPlayerService;
 import com.example.md4.service.role.IRoleService;
@@ -19,7 +20,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/players")
+@RequestMapping("/api/players")
 public class PlayerRestController {
     @Autowired
     private IPlayerService playerService;
@@ -29,6 +30,8 @@ public class PlayerRestController {
     private IRoleService roleService;
     @Autowired
     private IAccountService accountService;
+    @Autowired
+    private IPlayerRepository playerRepository;
 
     @GetMapping
     public ResponseEntity<Iterable<Player>> getPlayers() {
@@ -69,14 +72,16 @@ public class PlayerRestController {
     @GetMapping("/{id}")
     public ResponseEntity<Player> getPlayerById(@PathVariable Long id) {
         Optional<Player> playerOptional = playerService.findById(id);
-        return playerOptional.map
-                (player -> new ResponseEntity<>(player, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (!playerOptional.isPresent()) {
+            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(playerOptional.get(), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Player> createPlayer(@RequestBody Player player) {
         Player player1 = playerService.save(player);
-        Player playerNew = playerService.findPlayerLast(player.getId());
+        Player playerNew = playerRepository.findPlayerLast();
         Account account = new Account();
         account.setGmail(playerNew.getGmail());
         account.setPassword(passwordEncoder.encode(playerNew.getPassword()));
@@ -88,13 +93,21 @@ public class PlayerRestController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Player> editPlayer(@RequestBody Player player, @PathVariable Long id) {
-        Optional<Player> playerOptional = playerService.findById(id);
-        if (!playerOptional.isPresent()) {
+    public ResponseEntity<Player> editPlayer(@RequestBody Player playerEdit, @PathVariable("id") Long id) {
+        Optional<Player> player = playerService.findById(id);
+
+        if (!player.isPresent()) {
             new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        player = playerService.save(player);
-        return new ResponseEntity<>(player, HttpStatus.OK);
+        playerEdit.setId(player.get().getId());
+        playerEdit = playerService.save(playerEdit);
+        Player editCoach = playerRepository.editPlayer();
+        Account account = new Account();
+        account.setGmail(editCoach.getGmail());
+        account.setPassword(passwordEncoder.encode(editCoach.getPassword()));
+        account.setPlayer(playerService.findById(editCoach.getId()).get());
+        accountService.save(account);
+        return new ResponseEntity<>(playerEdit, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

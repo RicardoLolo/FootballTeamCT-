@@ -48,12 +48,6 @@ public class PlayerServiceImpl implements IPlayerService {
     }
 
     @Override
-    public Player findPlayerLast(Long id) {
-        playerRepository.findById(id);
-        return null;
-    }
-
-    @Override
     public Iterable<Position> findAllPosition() {
         return positionRepository.findAll();
     }

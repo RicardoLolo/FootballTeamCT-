@@ -7,6 +7,7 @@ import com.example.md4.service.Account.IAccountService;
 import com.example.md4.service.JwtService;
 import com.example.md4.service.role.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -62,18 +63,18 @@ public class AuthController {
         return ResponseEntity.ok(roles);
     }
 
-//    @GetMapping("/test")
-//    public ModelAndView test() {
-//        return new ModelAndView("index");
-//    }
+    @GetMapping("/test")
+    public ModelAndView test() {
+        return new ModelAndView("index");
+    }
 
     @PostConstruct
     public void init() {
         List<Account> accounts = (List<Account>) accountService.findAll();
         if (accounts.isEmpty()) {
             Account account = new Account();
-            account.setGmail("loloringo9999@gmail.com");
-            account.setPassword(passwordEncoder.encode("Lolomomo"));
+            account.setGmail("qwe@gmail.com");
+            account.setPassword(passwordEncoder.encode("qwe123"));
             accountService.save(account);
         }
     }

@@ -10,8 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jdbc.repository.query.Query;
 
 public interface IPlayerService extends IGeneralService<Player> {
-    @Query(value = "select * from player as p order p.id desc limit 1, nativeQuery=true ")
-    Player findPlayerLast(Long id);
 
     Iterable<Position> findAllPosition();
 

@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/icons/**",
                         "/tables/**").permitAll()
                 .antMatchers("/api/forms").hasAnyAuthority("Role_Admin")
-                .antMatchers("/profile_player").hasAnyAuthority("Role_Player", "Role_Admin")
+                .antMatchers("/profile_player/**").hasAnyAuthority("Role_Player", "Role_Admin")
                 .antMatchers("/api/coaches/**").hasAnyAuthority("Role_Coach", "Role_Admin")
                 .anyRequest().authenticated()
 
