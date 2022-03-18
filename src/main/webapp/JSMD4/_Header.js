@@ -11,7 +11,7 @@ console.log(token);
 console.log(role)
 
 function profile() {
-    if (currentUser) {
+    if (currentUser.role === "COACH") {
         window.location.href = "profile_coach.html"
     }
     if (currentUser.role === "PLAYER"){
@@ -22,14 +22,22 @@ function profile() {
 function forms_calender(){
     document.getElementById("forms_calender").hidden = !document.getElementById("forms_calender").hidden;
     document.getElementById("forms_mail").hidden = true;
+    document.getElementById("forms_calender").reset();
+    topFunction();
     document.getElementById("form-calendar").onclick = function () {
         save_calendar();
     };
 }
 
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
 function forms_mail(){
     document.getElementById("forms_mail").hidden = !document.getElementById("forms_mail").hidden;
     document.getElementById("forms_calender").hidden = true;
+    topFunction();
 }
 
 function save_calendar() {

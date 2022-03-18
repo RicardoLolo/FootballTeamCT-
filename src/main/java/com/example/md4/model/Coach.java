@@ -147,4 +147,6 @@ public class Coach {
     public void setCoachType(CoachType coachType) {
         this.coachType = coachType;
     }
+
+
 }

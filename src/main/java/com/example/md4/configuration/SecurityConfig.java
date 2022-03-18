@@ -59,13 +59,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/index/**",
                         "/calendar/**",
                         "/icons/**",
+                        "/api/coach/**",
                         "/tables/**").permitAll()
                 .and().authorizeRequests()
-                .antMatchers("/forms**").hasRole("ADMIN")
+                .antMatchers("/coach/**").hasRole("ADMIN")
                 .and().authorizeRequests()
                 .antMatchers("/profile_player**").hasRole("PLAYER")
                 .and().authorizeRequests()
-                .antMatchers("/profile_coach**").hasRole("COACH ")
+                .antMatchers("/profile_coach**").hasRole("COACH")
                 .and()
                 .formLogin().loginPage("/login").permitAll().successHandler(new CustomSuccessHandler())
                 .and()

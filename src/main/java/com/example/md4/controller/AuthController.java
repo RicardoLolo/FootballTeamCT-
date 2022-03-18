@@ -52,11 +52,4 @@ public class AuthController {
         }
         return (ResponseEntity<?>) ResponseEntity.notFound();
     }
-
-    @GetMapping("/role/{id}")
-    public ResponseEntity<Optional<Role>> roleById(@RequestParam("id") Long id) {
-        Optional<Role> roles = roleService.findById(id);
-        return ResponseEntity.ok(roles);
-    }
-
 }

@@ -5,7 +5,9 @@ import com.example.md4.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Set;
+
 @Repository
 public interface IRoleRepository extends JpaRepository<Role, Long> {
-    Role findByRole(String name);
+    Set<Role> findByRole(String name);
 }

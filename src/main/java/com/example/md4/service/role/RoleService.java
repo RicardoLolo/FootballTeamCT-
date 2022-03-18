@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class RoleService implements IRoleService {
@@ -33,7 +34,7 @@ public class RoleService implements IRoleService {
     }
 
     @Override
-    public Role findByName(String name) {
+    public Set<Role> findByName(String name) {
         return roleRepository.findByRole(name);
     }
 }
