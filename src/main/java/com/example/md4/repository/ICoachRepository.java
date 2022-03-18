@@ -12,8 +12,7 @@ public interface ICoachRepository extends PagingAndSortingRepository<Coach, Long
 
     @Query(value = "select * from coach as c order by c.id desc limit 1", nativeQuery = true)
     Coach findCoachLast();
-    @Query(value = "select coach.id, coach.gmail, coach.password\n" +
-            "from coach inner join account a2 on coach.id = a2.coach_id where coach_id = ?", nativeQuery = true)
+    @Query(value = "select * from account where coach_id", nativeQuery = true)
     Coach editCoach();
 
 }

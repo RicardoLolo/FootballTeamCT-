@@ -24,6 +24,7 @@
     <link href="assets/css/sidebar-menu.css" rel="stylesheet"/>
     <!-- Custom Style-->
     <link href="assets/css/app-style.css" rel="stylesheet"/>
+    <script src="JSMD4/profile_coach.js"></script>
 
 
 </head>
@@ -107,7 +108,7 @@
                                 <div class="form-group">
                                     <label for="input-10">Coach Type</label>
                                     <select th:field="*{coachType}" id="input-10" class="form-control form-control-rounded">
-                                        <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}">
+                                        <option th:each="c : ${coachType}" th:value="${c.id}" th:text="${c.name}">
                                         </option>
                                     </select>
                                 </div>

@@ -93,6 +93,7 @@ public class CoachWebController {
     @PutMapping("{id}")
     public ResponseEntity<Coach> editCoach(@RequestBody Coach coachEdit, @PathVariable("id") Long id) {
         Optional<Coach> coach = iCoachService.findOne(id);
+
         if (!coach.isPresent()) {
             new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -103,7 +104,6 @@ public class CoachWebController {
         account.setGmail(editCoach.getGmail());
         account.setPassword(passwordEncoder.encode(editCoach.getPassword()));
         account.setCoach(iCoachService.findOne(editCoach.getId()).get());
-//        account.setRoles((Set<Role>) roleService.findByName("COACH"));
         accountService.save(account);
         return new ResponseEntity<>(coachEdit, HttpStatus.OK);
     }
