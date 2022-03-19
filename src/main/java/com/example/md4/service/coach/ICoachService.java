@@ -10,7 +10,6 @@ import java.util.Optional;
 
 public interface ICoachService {
 
-
     Iterable<Coach> findAll();
 
     Optional<Coach> findOne(Long id);
@@ -24,5 +23,7 @@ public interface ICoachService {
     Iterable<Coach> findAllByName(String name);
 
     Page<Coach> findPage(Pageable pageable);
+
+    Optional<Coach> findByGmail(String mail);
 
 }

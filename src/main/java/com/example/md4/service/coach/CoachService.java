@@ -57,5 +57,7 @@ public class CoachService implements ICoachService {
         return coachRepository.findAll(pageable);
     }
 
-
-}
+    @Override
+    public Optional<Coach> findByGmail(String mail) {
+        return coachRepository.findByGmail(mail);
+    }}

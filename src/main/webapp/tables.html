@@ -27,7 +27,7 @@
 
 </head>
 
-<body class="bg-theme bg-theme3">
+<body class="bg-theme bg-theme6">
 
 <!-- start loader -->
 <!--<div id="pageloader-overlay" class="visible incoming">-->
@@ -59,12 +59,13 @@
                                     <h5 class="card-title nav-link">COACH</h5>
                                 </li>
                                 <!--search-->
-                                <li class="nav-item dropdown-lg">
-                                    <form class="search-bar">
+
+                                <li  class="nav-item dropdown-lg">
+                                    <form id="searchForm" class="search-bar">
                                         <label>
-                                            <input type="text" class="form-control" placeholder="Enter keywords">
+                                            <input type="text" id="search" class="form-control" placeholder="Enter keywords">
                                         </label>
-                                        <a href="#"><i class="icon-magnifier"></i></a>
+                                        <a href="#"><i class="icon-magnifier" onclick="searchCoach()"></i></a>
                                     </form>
                                 </li>
                                 <!--end search-->
@@ -74,33 +75,22 @@
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>BirthDay</th>
+                                        <th>Salary</th>
+                                        <th>Bonus</th>
+                                        <th>Introduction</th>
+                                        <th>Gmail</th>
+                                        <th>Password</th>
+                                        <th>Coach Type</th>
+                                        <th colspan="2">Action</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+                                    <tbody id="coachList">
                                     </tbody>
                                 </table>
+                                <div id="displayPage"></div>
                             </div>
                         </div>
                     </div>
@@ -233,5 +223,6 @@
     });
 </script>
 
+<script src="JSMD4/_Header.js"></script>
 </body>
 </html>
