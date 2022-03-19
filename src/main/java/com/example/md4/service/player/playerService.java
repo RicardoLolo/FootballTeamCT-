@@ -66,6 +66,11 @@ public class playerService implements IPlayerService{
     }
 
     @Override
+    public Optional<Player> findByGmail(String mail) {
+        return playerRepository.findByGmail(mail);
+    }
+
+    @Override
     public Iterable<Player> findAllByName(String name) {
         return playerRepository.findAllByNameContaining(name);
     }

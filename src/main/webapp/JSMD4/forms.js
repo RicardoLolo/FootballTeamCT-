@@ -1,3 +1,9 @@
+if (role_start === "ADMIN"){
+    document.getElementById("forms-new-coach").hidden = false;
+    document.getElementById("forms-new-player").hidden = false;
+} else if (role_start === "COACH"){
+    document.getElementById("forms-new-player").hidden = false;
+}
 
 function getTypeCoach() {
     $.ajax({
@@ -34,6 +40,14 @@ function addNewCoach() {
     let introduction = $('#input-7').val();
     let coachType = $('#input-10').val();
     let password = $('#input-11').val();
+    if(gmail === ''){
+        document.getElementById("card-coach").innerHTML = "Gmail cannot be blank!";
+        return false;
+    }
+    if (password === ''){
+        document.getElementById("card-coach").innerHTML = "Password cannot be blank!";
+        return false;
+    }
     let newCoach = {
         name: name,
         gmail: gmail,
@@ -64,8 +78,13 @@ function addNewCoach() {
             type: "POST",
             data: data,
             url: "http://localhost:8080/api/coach/save-coach",
-            success: function () {
-                document.getElementById("forms-new-coach").reset();
+            success: function (data) {
+                if (data.status === 204 || data.status === 400) {
+                    document.getElementById("card-coach").innerHTML = "Pay attention to the information in the registration form (Gmail may be duplicated)!";
+                } else {
+                    document.getElementById("card-coach").innerHTML = "Sign Up Success !";
+                    document.getElementById("form-new-coach").reset();
+                }
             }
         });
     }
@@ -77,10 +96,10 @@ function getPerformance() {
     $.ajax({
         type: "GET",
         //tên API
-        url: `http://localhost:8080/api/player/type-coach`,
+        url: `http://localhost:8080/api/player/performance`,
         //xử lý khi thành công
         success: function (data) {
-            let content = '<select id="input-25" class="form-control form-control-rounded">\n'
+            let content = '<select id="input-24" class="form-control form-control-rounded">\n'
             for (let i = 0; i < data.length; i++) {
                 content += displayPerformance(data[i]);
             }
@@ -100,10 +119,10 @@ function getPosition() {
     $.ajax({
         type: "GET",
         //tên API
-        url: `http://localhost:8080/api/player/type-coach`,
+        url: `http://localhost:8080/api/player/position`,
         //xử lý khi thành công
         success: function (data) {
-            let content = '<select id="input-24" class="form-control form-control-rounded">\n'
+            let content = '<select id="input-23" class="form-control form-control-rounded">\n'
             for (let i = 0; i < data.length; i++) {
                 content += displayPosition(data[i]);
             }
@@ -123,10 +142,10 @@ function getStatus() {
     $.ajax({
         type: "GET",
         //tên API
-        url: `http://localhost:8080/api/player/type-coach`,
+        url: `http://localhost:8080/api/player/status`,
         //xử lý khi thành công
         success: function (data) {
-            let content = '<select id="input-26" class="form-control form-control-rounded">\n'
+            let content = '<select id="input-25" class="form-control form-control-rounded">\n'
             for (let i = 0; i < data.length; i++) {
                 content += displayStatus(data[i]);
             }
@@ -153,10 +172,18 @@ function addNewPlayer() {
     let salary = $('#input-18').val();
     let bonus = $('#input-19').val();
     let introduction = $('#input-20').val();
-    let position = $('#input-24').val();
-    let performance = $('#input-25').val();
-    let status = $('#input-26').val();
-    let password = $('#input-27').val();
+    let position = $('#input-23').val();
+    let performance = $('#input-24').val();
+    let status = $('#input-25').val();
+    let password = $('#input-26').val();
+    if(gmail === ''){
+        document.getElementById("card-player").innerHTML = "Gmail cannot be blank!";
+        return false;
+    }
+    if (password === ''){
+        document.getElementById("card-player").innerHTML = "Password cannot be blank!";
+        return false;
+    }
     let newPlayer = {
         name: name,
         gmail: gmail,
@@ -180,10 +207,10 @@ function addNewPlayer() {
     };
     data.append("player", new Blob([JSON.stringify(newPlayer)], {type : 'application/json'}))
     if ($('#input-21')[0].files[0] !== undefined){
-        data.append("avaFile-player", $('#input-8')[0].files[0]);
+        data.append("avaFile-player", $('#input-21')[0].files[0]);
     }
-    if ($('#input-23')[0].files[0] !== undefined){
-        data.append("backGroundFile-player", $('#input-9')[0].files[0]);
+    if ($('#input-22')[0].files[0] !== undefined){
+        data.append("backGroundFile-player", $('#input-22')[0].files[0]);
     }
     console.log(data.get("avaFile-player"))
     console.log(data.get("backGroundFile-player"))
@@ -195,11 +222,15 @@ function addNewPlayer() {
             type: "POST",
             data: data,
             url: "http://localhost:8080/api/player/save-player",
-            success: function () {
-                document.getElementById("forms-new-player").reset();
+            success: function (data) {
+                if(data.status === 204 || data.status === 400){
+                    document.getElementById("card-player").innerHTML = "Pay attention to the information in the registration form (Gmail may be duplicated)!";
+                } else {
+                    document.getElementById("card-coach").innerHTML = "Sign Up Success !";
+                    document.getElementById("form-new-player").reset();
+                }
             }
         });
     }
-    //chặn sự kiện mặc định của thẻ
     event.preventDefault();
 }

@@ -89,50 +89,64 @@ public class PlayerController {
         return new ResponseEntity<>(playerStatus, HttpStatus.OK);
     }
 
-    @GetMapping("/find-player/{id}")
+    @GetMapping("/find-player-by-id/{id}")
     public ResponseEntity<Player> getPlayerById(@PathVariable Long id) {
         Optional<Player> playerOptional = playerService.findById(id);
         return playerOptional.map(player -> new ResponseEntity<>(player, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping
+    @GetMapping("/find-player-by-gmail")
+    public ResponseEntity<Player> getPlayerByGmail(@RequestParam("gmail") String mail) {
+        Optional<Player> player = playerService.findByGmail(mail);
+        if (!player.isPresent()) {
+            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(player.get(), HttpStatus.OK);
+    }
+
+    @PostMapping("/save-player")
     public ResponseEntity<Player> createPlayer(@RequestPart("player") Player player,
                                                @RequestPart("avaFile-player") MultipartFile avaFile,
                                                @RequestPart("backGroundFile-player") MultipartFile backGroundFile) {
-        String avaFileName = avaFile.getOriginalFilename();
-        String backGroundFileName = backGroundFile.getOriginalFilename();
-        try {
-            FileCopyUtils.copy(avaFile.getBytes(), new File(upload_file_avatar + avaFileName));
-            player.setAvatarURL("webapp/Images/Avatar" + avaFileName);
-        } catch (IOException e) {
-            player.setAvatarURL("webapp/Images/Ghostblade (P.2)_ (20).jpg");
-            e.printStackTrace();
+        if (accountService.existsByGmail(player.getGmail())){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            String avaFileName = avaFile.getOriginalFilename();
+            String backGroundFileName = backGroundFile.getOriginalFilename();
+            try {
+                FileCopyUtils.copy(avaFile.getBytes(), new File(upload_file_avatar + avaFileName));
+                player.setAvatarURL("webapp/Images/Avatar" + avaFileName);
+            } catch (IOException e) {
+                player.setAvatarURL("webapp/Images/Ghostblade (P.2)_ (20).jpg");
+                e.printStackTrace();
+            }
+            try {
+                FileCopyUtils.copy(backGroundFile.getBytes(), new File(upload_file_background + backGroundFileName));
+                player.setAvatarBackGround("webapp/Images/BackGround" + backGroundFileName);
+            } catch (IOException e) {
+                player.setAvatarURL("webapp/Images/Ghostblade (P.2)_ (20).jpg");
+                e.printStackTrace();
+            }
+            player.setBMI(player.getWeight() / (player.getHeight() * player.getHeight()));
+            Player player1 = playerService.save(player);
+            Player playerNew = playerRepository.findPlayerLast();
+            Account account = new Account();
+            account.setGmail(playerNew.getGmail());
+            account.setPassword(passwordEncoder.encode(playerNew.getPassword()));
+            account.setPlayer(playerService.findById(playerNew.getId()).get());
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleService.findById(3L).get());
+            account.setRoles(roles);
+            accountService.save(account);
+            return new ResponseEntity<>(player1, HttpStatus.CREATED);
         }
-        try {
-            FileCopyUtils.copy(backGroundFile.getBytes(), new File(upload_file_background + backGroundFileName));
-            player.setAvatarBackGround("webapp/Images/BackGround" + backGroundFileName);
-        } catch (IOException e){
-            player.setAvatarURL("webapp/Images/Ghostblade (P.2)_ (20).jpg");
-            e.printStackTrace();
-        }
-        Player player1 = playerService.save(player);
-        Player playerNew = playerRepository.findPlayerLast();
-        Account account = new Account();
-        account.setGmail(playerNew.getGmail());
-        account.setPassword(passwordEncoder.encode(playerNew.getPassword()));
-        account.setPlayer(playerService.findById(playerNew.getId()).get());
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleService.findById(3L).get());
-        account.setRoles(roles);
-        accountService.save(account);
-        return new ResponseEntity<>(player1, HttpStatus.CREATED);
     }
 
     @PutMapping("/edit-player/{id}")
-    public ResponseEntity<Optional<Player>> editPlayer(@RequestBody Player playerEdit,
+    public ResponseEntity<Optional<Player>> editPlayer(@RequestPart("player") Player playerEdit,
                                            @PathVariable("id") Long id,
-                                           @RequestPart("avaFile-coach") MultipartFile avaFile,
-                                           @RequestPart("backGroundFile-coach") MultipartFile backGroundFile) {
+                                           @RequestPart("avaFile-player") MultipartFile avaFile,
+                                           @RequestPart("backGroundFile-player") MultipartFile backGroundFile) {
         Optional<Player> player = playerService.findById(id);
         String avaFileName = avaFile.getOriginalFilename();
         String backGroundFileName = backGroundFile.getOriginalFilename();

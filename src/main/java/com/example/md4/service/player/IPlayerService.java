@@ -8,6 +8,8 @@ import com.example.md4.service.IGeneralService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 public interface IPlayerService extends IGeneralService<Player> {
 
     Iterable<Position> findAllPosition();
@@ -15,6 +17,8 @@ public interface IPlayerService extends IGeneralService<Player> {
     Iterable<Performance> findAllPerformance();
 
     Iterable<Status> findAllStatus();
+
+    Optional<Player> findByGmail(String mail);
 
     Iterable<Player> findAllByName(String name);
 

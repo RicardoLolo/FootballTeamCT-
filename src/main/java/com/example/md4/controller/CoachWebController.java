@@ -83,9 +83,18 @@ public class CoachWebController {
         }
         return new ResponseEntity<>(coachTypes, HttpStatus.OK);
     }
-    @GetMapping("/find-coach/{id}")
-    public ResponseEntity<Coach> showOne(@PathVariable("id") Long id) {
+    @GetMapping("/find-coach-by-id/{id}")
+    public ResponseEntity<Coach> findById(@PathVariable("id") Long id) {
         Optional<Coach> coach = iCoachService.findOne(id);
+        if (!coach.isPresent()) {
+            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(coach.get(), HttpStatus.OK);
+    }
+
+    @GetMapping("/find-coach-by-gmail")
+    public ResponseEntity<Coach> findByGmail(@RequestParam("gmail") String mail) {
+        Optional<Coach> coach = iCoachService.findByGmail(mail);
         if (!coach.isPresent()) {
             new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -97,38 +106,42 @@ public class CoachWebController {
     public ResponseEntity<Coach> createCoach(@RequestPart("coach") Coach coach,
                                              @RequestPart("avaFile-coach") MultipartFile avaFile,
                                              @RequestPart("backGroundFile-coach") MultipartFile backGroundFile) {
-        String avaFileName = avaFile.getOriginalFilename();
-        String backGroundFileName = backGroundFile.getOriginalFilename();
-        try {
-            FileCopyUtils.copy(avaFile.getBytes(), new File(upload_file_avatar + avaFileName));
-            coach.setAvatarURL("webapp/Images/Avatar" + avaFileName);
-        } catch (IOException e) {
-            coach.setAvatarURL("webapp/Images/Ghostblade (P.2)_ (20).jpg");
-            e.printStackTrace();
+        if (accountService.existsByGmail(coach.getGmail())){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            String avaFileName = avaFile.getOriginalFilename();
+            String backGroundFileName = backGroundFile.getOriginalFilename();
+            try {
+                FileCopyUtils.copy(avaFile.getBytes(), new File(upload_file_avatar + avaFileName));
+                coach.setAvatarURL("webapp/Images/Avatar" + avaFileName);
+            } catch (IOException e) {
+                coach.setAvatarURL("webapp/Images/Ghostblade (P.2)_ (20).jpg");
+                e.printStackTrace();
+            }
+            try {
+                FileCopyUtils.copy(backGroundFile.getBytes(), new File(upload_file_background + backGroundFileName));
+                coach.setAvatarBackGround("webapp/Images/BackGround" + backGroundFileName);
+            } catch (IOException e){
+                coach.setAvatarURL("webapp/Images/Ghostblade (P.2)_ (20).jpg");
+                e.printStackTrace();
+            }
+            Coach coachCreate = iCoachService.save(coach);
+            Coach coachNew = iCoachRepository.findCoachLast();
+            Account account = new Account();
+            account.setGmail(coachNew.getGmail());
+            account.setPassword(passwordEncoder.encode(coachNew.getPassword()));
+            account.setCoach(iCoachService.findOne(coachNew.getId()).get());
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleService.findById(2L).get());
+            account.setRoles(roles);
+            accountService.save(account);
+            return new ResponseEntity<>(coachCreate, HttpStatus.CREATED);
         }
-        try {
-            FileCopyUtils.copy(backGroundFile.getBytes(), new File(upload_file_background + backGroundFileName));
-            coach.setAvatarBackGround("webapp/Images/BackGround" + backGroundFileName);
-        } catch (IOException e){
-            coach.setAvatarURL("webapp/Images/Ghostblade (P.2)_ (20).jpg");
-            e.printStackTrace();
-        }
-        Coach coachCreate = iCoachService.save(coach);
-        Coach coachNew = iCoachRepository.findCoachLast();
-        Account account = new Account();
-        account.setGmail(coachNew.getGmail());
-        account.setPassword(passwordEncoder.encode(coachNew.getPassword()));
-        account.setCoach(iCoachService.findOne(coachNew.getId()).get());
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleService.findById(2L).get());
-        account.setRoles(roles);
-        accountService.save(account);
-        return new ResponseEntity<>(coachCreate, HttpStatus.CREATED);
     }
 
     //Cập nhật
     @PutMapping("/edit-coach/{id}")
-    public ResponseEntity<Optional<Coach>> editCoach(@RequestBody Coach coachEdit,
+    public ResponseEntity<Optional<Coach>> editCoach(@RequestPart("coach") Coach coachEdit,
                                            @PathVariable("id") Long id,
                                            @RequestPart("avaFile-coach") MultipartFile avaFile,
                                            @RequestPart("backGroundFile-coach") MultipartFile backGroundFile) {

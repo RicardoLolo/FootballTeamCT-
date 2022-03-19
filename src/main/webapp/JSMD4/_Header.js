@@ -2,31 +2,35 @@ let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
 let token = localStorage.getItem("token");
 
-role = currentUser.roles[0].authority;
+let role_start = currentUser.roles[0].authority;
 
-console.log(currentUser);
+let email_start = currentUser.email;
+
+console.log(email_start);
 
 console.log(token);
 
-console.log(role)
+console.log(role_start);
 
 function profile() {
-    if (currentUser.role === "COACH") {
+    if (role_start === "COACH") {
         window.location.href = "profile_coach.html"
     }
-    if (currentUser.role === "PLAYER"){
+    if (role_start === "PLAYER"){
         window.location.href = "profile_player.html"
     }
 }
 
 function forms_calender(){
-    document.getElementById("forms_calender").hidden = !document.getElementById("forms_calender").hidden;
-    document.getElementById("forms_mail").hidden = true;
-    document.getElementById("forms_calender").reset();
-    topFunction();
-    document.getElementById("form-calendar").onclick = function () {
-        save_calendar();
-    };
+    if (role_start === "COACH" || role_start === "ADMIN"){
+        document.getElementById("forms_calender").hidden = !document.getElementById("forms_calender").hidden;
+        document.getElementById("forms_mail").hidden = true;
+        topFunction();
+        document.getElementById("form_calender").reset();
+        document.getElementById("form-calendar").onclick = function () {
+            save_calendar();
+        };
+    }
 }
 
 function topFunction() {

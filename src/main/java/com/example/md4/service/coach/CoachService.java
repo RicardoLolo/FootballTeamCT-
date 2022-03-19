@@ -31,6 +31,11 @@ public class CoachService implements ICoachService {
     }
 
     @Override
+    public Optional<Coach> findByGmail(String mail) {
+        return coachRepository.findByGmail(mail);
+    }
+
+    @Override
     public Coach save(Coach coach) {
         return coachRepository.save(coach);
 

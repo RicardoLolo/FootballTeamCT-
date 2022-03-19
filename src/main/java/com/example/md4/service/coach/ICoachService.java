@@ -15,6 +15,8 @@ public interface ICoachService {
 
     Optional<Coach> findOne(Long id);
 
+    Optional<Coach> findByGmail(String mail);
+
     Coach save(Coach coach);
 
     void delete(Long id);

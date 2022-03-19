@@ -39,7 +39,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Account account) {
-        if (!accountService.findAccountByGmailAndPassword(account.getGmail(), account.getPassword()).isPresent()){
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
 
@@ -49,7 +48,5 @@ public class AuthController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Account currentUser = accountService.findByGmail(account.getGmail()).get();
         return ResponseEntity.ok(new JwtResponse(currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getAuthorities()));
-        }
-        return (ResponseEntity<?>) ResponseEntity.notFound();
     }
 }

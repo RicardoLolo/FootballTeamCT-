@@ -27,16 +27,16 @@
 
 </head>
 
-<body class="bg-theme bg-theme3">
+<body class="bg-theme bg-theme4">
 
 <!-- start loader -->
-<!--<div id="pageloader-overlay" class="visible incoming">-->
-<!--    <div class="loader-wrapper-outer">-->
-<!--        <div class="loader-wrapper-inner">-->
-<!--            <div class="loader"></div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div id="pageloader-overlay" class="visible incoming">
+    <div class="loader-wrapper-outer">
+        <div class="loader-wrapper-inner">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
 <!-- end loader -->
 
 <!-- Start wrapper-->
@@ -51,12 +51,12 @@
             <div class="row mt-3">
 
                 <!--Tao account HLV-->
-                <div class="col-lg-6" id="forms-new-coach">
+                <div class="col-lg-6" id="forms-new-coach" hidden>
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-title">Coach</div>
+                            <div class="card-title" id="card-coach">Coach</div>
                             <hr>
-                            <form>
+                            <form id="form-new-coach">
                                 <div class="form-group">
                                     <label for="input-1">Name</label>
                                     <input type="text" class="form-control form-control-rounded" id="input-1"
@@ -132,12 +132,12 @@
                 </div>
 
                 <!--Tao account player-->
-                <div class="col-lg-6" id="forms-new-player">
+                <div class="col-lg-6" id="forms-new-player" hidden>
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-title">Player</div>
+                            <div class="card-title" id="card-player">Player</div>
                             <hr>
-                            <form>
+                            <form id="form-new-player">
                                 <div class="form-group">
                                     <label for="input-12">Name</label>
                                     <input type="text" class="form-control form-control-rounded" id="input-12"
@@ -190,8 +190,8 @@
                                            placeholder="Enter Your Avatar">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input-23">BackGround</label>
-                                    <input type="file" class="form-control form-control-rounded" id="input-23"
+                                    <label for="input-22">BackGround</label>
+                                    <input type="file" class="form-control form-control-rounded" id="input-22"
                                            placeholder="Enter Your BackGround">
                                 </div>
                                 <div class="form-group">
@@ -207,8 +207,8 @@
                                     <div id="div-status"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input-27">Password</label>
-                                    <input type="text" class="form-control form-control-rounded" id="input-27"
+                                    <label for="input-26">Password</label>
+                                    <input type="text" class="form-control form-control-rounded" id="input-26"
                                            placeholder="Enter Your Password" required>
                                 </div>
                                 <div class="form-group py-2">
