@@ -7,13 +7,12 @@ function displayCoach(coach) {
                 <td>${coach.salary}</td>
                 <td>${coach.bonus}</td>
                 <td>${coach.introduction}</td>
-                <td>${coach.avatarURL}</td>
-                <td>${coach.avatarBackGround}</td>
                 <td>${coach.gmail}</td>
                 <td>${coach.password}</td>
                 <td>${coach.coachType.type}</td>
-                <td><button class="btn btn-danger" onclick="deleteCoach(${coach.id})">Delete</button></td>
-                <td><button class="btn btn-warning" onclick="editCoach(${coach.id})">Edit</button></td></tr>`;
+                <td><button class="btn btn-light btn-round px-3" onclick="deleteCoach(${coach.id})">Delete</button></td>
+                <td><button class="btn btn-light btn-round px-3" onclick="editCoach(${coach.id})">Edit</button></td></tr>`;
+
 }
 function getCoach() {
     $.ajax({
