@@ -3,6 +3,7 @@ package com.example.md4.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -86,4 +87,5 @@ public class Account {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 }

@@ -1,4 +1,4 @@
-let index = 0;
+let id_calendar = 0;
 
 getCalenderToday();
 
@@ -33,11 +33,12 @@ function eventCalendar(id){
         type: "GET",
         url: `http://localhost:8080/api/calendar/event_calendar/${id}`,
         success: function (data) {
+            topFunction();
             $('#title-new').val(data.content);
             $('#url-new').val(data.urlEvent);
             $('#date-start').val(data.dateStart);
             $('#date-finish').val(data.dateFinish);
-            index = data.id;
+            id_calendar = data.id;
             document.getElementById("forms_calender").hidden = false;
             document.getElementById("form-calendar").onclick = function () {
                 editCalendar();
@@ -77,7 +78,7 @@ function editCalendar(){
             },
             type: "PUT",
             data: JSON.stringify(data),
-            url: `http://localhost:8080/api/calendar/edit_calendar/${index}`,
+            url: `http://localhost:8080/api/calendar/edit_calendar/${id_calendar}`,
             success: function () {
                 forms_calender();
                 getCalenderToday();
