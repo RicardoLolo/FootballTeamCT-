@@ -62,6 +62,15 @@ public class PlayerController {
         return new ResponseEntity<>(players, HttpStatus.OK);
     }
 
+    @GetMapping("/page-player")
+    public ResponseEntity<Page<Player>> showPagePlayer(@PageableDefault(value = 8) Pageable pageable) {
+        Page<Player> player_page = playerService.findPage(pageable);
+        if (!player_page.iterator().hasNext()) {
+            new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(player_page, HttpStatus.OK);
+    }
+
     @GetMapping("/position")
     public ResponseEntity<Iterable<Position>> getPosition() {
         Iterable<Position> playerPositions = playerService.findAllPosition();

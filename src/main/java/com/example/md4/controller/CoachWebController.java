@@ -143,8 +143,8 @@ public class CoachWebController {
     @PutMapping("/edit-coach/{id}")
     public ResponseEntity<Optional<Coach>> editCoach(@RequestPart("coach") Coach coachEdit,
                                            @PathVariable("id") Long id,
-                                           @RequestPart("avaFile-coach") MultipartFile avaFile,
-                                           @RequestPart("backGroundFile-coach") MultipartFile backGroundFile) {
+                                           @RequestPart("avaFile_coach") MultipartFile avaFile,
+                                           @RequestPart("backGroundFile_coach") MultipartFile backGroundFile) {
         Optional<Coach> coach = iCoachService.findOne(id);
         String avaFileName = avaFile.getOriginalFilename();
         String backGroundFileName = backGroundFile.getOriginalFilename();

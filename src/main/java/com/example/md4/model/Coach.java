@@ -27,8 +27,10 @@ public class Coach {
     @Transient
     private MultipartFile backGroundFile;
     private String avatarBackGround;
+
     @Column(unique = true, nullable = false)
     private String gmail;
+
     @Column(nullable = false)
     private String password;
 

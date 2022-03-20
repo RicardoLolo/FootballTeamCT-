@@ -26,10 +26,6 @@
     <link href="assets/css/sidebar-menu.css" rel="stylesheet"/>
     <!-- Custom Style-->
     <link href="assets/css/app-style.css" rel="stylesheet"/>
-    <script>
-        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-    </script>
 </head>
 
 <body class="bg-theme bg-theme3">
@@ -64,6 +60,12 @@
         </li>
 
         <li>
+            <a href="list_event.html">
+                <i class="zmdi zmdi-calendar-check text-success"></i> <span>Event</span>
+            </a>
+        </li>
+
+        <li>
             <a href="calendar.html">
                 <i class="zmdi zmdi-calendar-check text-info"></i> <span>Calendar</span>
                                 <small class="badge float-right badge-light">Testing</small>
@@ -92,13 +94,6 @@
         <li>
             <a href="icons.html" target="_blank">
                 <i class="zmdi zmdi-invert-colors text-info"></i> <span>UI Icons</span>
-                <small class="badge float-right badge-light">Testing</small>
-            </a>
-        </li>
-
-        <li>
-            <a href="#"><i class="zmdi zmdi-chart-donut text-success">
-                </i> <span>Warning</span>
                 <small class="badge float-right badge-light">Testing</small>
             </a>
         </li>
@@ -151,6 +146,8 @@
 <script src='assets/plugins/fullcalendar/js/moment.min.js'></script>
 <script src='assets/plugins/fullcalendar/js/fullcalendar.min.js'></script>
 <script src="assets/plugins/fullcalendar/js/fullcalendar-custom-script.js"></script>
+
+<script src="JSMD4/_Header.js"></script>
 
 </body>
 </html>

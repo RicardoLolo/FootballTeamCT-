@@ -62,10 +62,10 @@ function addNewCoach() {
         }
     };
     data.append("coach", new Blob([JSON.stringify(newCoach)], {type : 'application/json'}))
-    if ($('#input-8')[0].files[0] !== undefined){
+    if ($("#input-8")[0].files[0] !== undefined){
         data.append("avaFile-coach", $('#input-8')[0].files[0]);
     }
-    if ($('#input-9')[0].files[0] !== undefined){
+    if ($("#input-9")[0].files[0] !== undefined){
         data.append("backGroundFile-coach", $('#input-9')[0].files[0]);
     }
     console.log(data.get("avaFile-coach"))
@@ -79,7 +79,7 @@ function addNewCoach() {
             data: data,
             url: "http://localhost:8080/api/coach/save-coach",
             success: function (data) {
-                if (data.status === 204 || data.status === 400) {
+                if (data.status === 204 || data.status === 400 || data.status === 404) {
                     document.getElementById("card-coach").innerHTML = "Pay attention to the information in the registration form (Gmail may be duplicated)!";
                 } else {
                     document.getElementById("card-coach").innerHTML = "Sign Up Success !";
@@ -206,10 +206,10 @@ function addNewPlayer() {
         }
     };
     data.append("player", new Blob([JSON.stringify(newPlayer)], {type : 'application/json'}))
-    if ($('#input-21')[0].files[0] !== undefined){
+    if ($("#input-21")[0].files[0] !== undefined){
         data.append("avaFile-player", $('#input-21')[0].files[0]);
     }
-    if ($('#input-22')[0].files[0] !== undefined){
+    if ($("#input-22")[0].files[0] !== undefined){
         data.append("backGroundFile-player", $('#input-22')[0].files[0]);
     }
     console.log(data.get("avaFile-player"))
@@ -223,7 +223,7 @@ function addNewPlayer() {
             data: data,
             url: "http://localhost:8080/api/player/save-player",
             success: function (data) {
-                if(data.status === 204 || data.status === 400){
+                if(data.status === 204 || data.status === 400 || data.status === 404){
                     document.getElementById("card-player").innerHTML = "Pay attention to the information in the registration form (Gmail may be duplicated)!";
                 } else {
                     document.getElementById("card-coach").innerHTML = "Sign Up Success !";

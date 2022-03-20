@@ -1,5 +1,11 @@
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
+console.log(currentUser);
+
+if(currentUser === null){
+    window.location.href = "login.html"
+}
+
 let token = localStorage.getItem("token");
 
 let role_start = currentUser.roles[0].authority;
@@ -14,11 +20,33 @@ console.log(role_start);
 
 function profile() {
     if (role_start === "COACH") {
-        window.location.href = "profile_coach.html"
+        findCoachByGmail();
     }
     if (role_start === "PLAYER"){
-        window.location.href = "profile_player.html"
+        findPlayerByGmail();
     }
+}
+
+function findCoachByGmail(){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/api/coach/find-coach-by-gmail?gmail=${email_start}`,
+        success: function (data) {
+            localStorage.setItem('id_coach', data.id);
+            window.location.href = "profile_coach.html"
+        }
+    });
+}
+
+function findPlayerByGmail(){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/api/player/find-player-by-gmail?gmail=${email_start}`,
+        success: function (data) {
+            localStorage.setItem('id_player', data.id);
+            window.location.href = "profile_player.html";
+        }
+    });
 }
 
 function forms_calender(){
