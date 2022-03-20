@@ -3,7 +3,7 @@ let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 console.log(currentUser);
 
 if(currentUser === null){
-    window.location.href = "login.html"
+    window.location.href = "login.html";
 }
 
 let token = localStorage.getItem("token");
