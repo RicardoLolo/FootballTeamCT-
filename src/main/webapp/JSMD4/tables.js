@@ -23,21 +23,21 @@ function onclickEditCoach(id){
     window.location.href = "profile_coach.html";
 }
 
-function getCoach() {
-    $.ajax({
-        type: "GET",
-        url: `http://localhost:8080/api/coach/list-coach`,
-        success: function (data) {
-            // hiển thị danh sách
-            let display_coach = '';
-            for (let i = 0; i < data.length; i++) {
-                display_coach += displayCoach(data[i]);
-            }
-            document.getElementById("coachList").innerHTML = display_coach;
-
-        }
-    });
-}
+// function getCoach() {
+//     $.ajax({
+//         type: "GET",
+//         url: `http://localhost:8080/api/coach/list-coach`,
+//         success: function (data) {
+//             // hiển thị danh sách
+//             let display_coach = '';
+//             for (let i = 0; i < data.length; i++) {
+//                 display_coach += displayCoach(data[i]);
+//             }
+//             document.getElementById("coachList").innerHTML = display_coach;
+//
+//         }
+//     });
+// }
 
 //hàm lấy list coach theo page
 function getCoachByPage(page) {
@@ -143,26 +143,28 @@ function onclickEditPlayer(id){
     window.location.href = "profile_player.html";
 }
 
-function getPlayer() {
-    $.ajax({
-        type: "GET",
-        url: `http://localhost:8080/api/player/list-player`,
-        success: function (data) {
-            // hiển thị danh sách
-            let list_player = '';
-            for (let i = 0; i < data.length; i++) {
-                list_player += display_player(data[i]);
-            }
-            document.getElementById("list-player").innerHTML = list_player;
 
-        }
-    });
-}
+// function getPlayer() {
+//     $.ajax({
+//         type: "GET",
+//         url: `http://localhost:8080/api/player/list-player`,
+//         success: function (data) {
+//             // hiển thị danh sách
+//             let list_player = '';
+//             for (let i = 0; i < data.length; i++) {
+//                 list_player += display_player(data[i]);
+//             }
+//             document.getElementById("list-player").innerHTML = list_player;
+//
+//         }
+//     });
+// }
+
 
 function getPlayerByPage(page) {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/api/player/page-player?page=${page}`,
+        url: `http://localhost:8080/api/player/pagePlayer?page=${page}`,
         success: function (data) {
             let array = data.content
             let display_page = '';

@@ -62,7 +62,7 @@ public class PlayerController {
         return new ResponseEntity<>(players, HttpStatus.OK);
     }
 
-    @GetMapping("/page-player")
+    @GetMapping("/pagePlayer")
     public ResponseEntity<Page<Player>> showPagePlayer(@PageableDefault(value = 8) Pageable pageable) {
         Page<Player> player_page = playerService.findPage(pageable);
         if (!player_page.iterator().hasNext()) {
