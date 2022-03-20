@@ -30,13 +30,13 @@
 <body class="bg-theme bg-theme6">
 
 <!-- start loader -->
-<!--<div id="pageloader-overlay" class="visible incoming">-->
-<!--    <div class="loader-wrapper-outer">-->
-<!--        <div class="loader-wrapper-inner">-->
-<!--            <div class="loader"></div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div id="pageloader-overlay" class="visible incoming">
+    <div class="loader-wrapper-outer">
+        <div class="loader-wrapper-inner">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
 <!-- end loader -->
 
 <!-- Start wrapper-->
@@ -62,9 +62,11 @@
                                 <li class="nav-item dropdown-lg">
                                     <form class="search-bar">
                                         <label>
-                                            <input type="text" class="form-control" placeholder="Enter keywords">
+                                            <input type="text" class="form-control" placeholder="Enter keywords" id="search-coach">
                                         </label>
-                                        <a href="#"><i class="icon-magnifier"></i></a>
+                                        <a href="#" onclick="searchCoach()">
+                                            <i class="icon-magnifier"></i>
+                                        </a>
                                     </form>
                                 </li>
                                 <!--end search-->
@@ -74,33 +76,20 @@
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Date of birth</th>
+                                        <th scope="col">Country</th>
+                                        <th scope="col">Salary</th>
+                                        <th scope="col">Bonus</th>
+                                        <th scope="col">Gmail</th>
+                                        <th scope="col">Coach Type</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+                                    <tbody id="coachList">
                                     </tbody>
                                 </table>
+                                <div id="displayPageCoach"></div>
                             </div>
                         </div>
                     </div>
@@ -119,9 +108,11 @@
                                 <li class="nav-item dropdown-lg">
                                     <form class="search-bar">
                                         <label>
-                                            <input type="text" class="form-control" placeholder="Enter keywords">
+                                            <input type="text" class="form-control" placeholder="Enter keywords" id="search-player">
                                         </label>
-                                        <a href="#"><i class="icon-magnifier"></i></a>
+                                        <a href="#" onclick="searchPlayer()">
+                                            <i class="icon-magnifier"></i>
+                                        </a>
                                     </form>
                                 </li>
                                 <!--end search-->
@@ -131,32 +122,24 @@
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Date of birth</th>
+                                        <th scope="col">Country</th>
+                                        <th scope="col">Height</th>
+                                        <th scope="col">Weight</th>
+                                        <th scope="col">Salary</th>
+                                        <th scope="col">Bonus</th>
+                                        <th scope="col">Gmail</th>
+                                        <th scope="col">Position</th>
+                                        <th scope="col">Performance</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td colspan="2">Larry the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+                                    <tbody id="list-player">
                                     </tbody>
                                 </table>
+                                <div id="display-page-player"></div>
                             </div>
                         </div>
                     </div>
@@ -234,5 +217,8 @@
 </script>
 
 <script src="JSMD4/_Header.js"></script>
+<script src="JSMD4/tables.js"></script>
+<script src="JSMD4/profile_coach.js"></script>
+<script src="JSMD4/profile_player.js"></script>
 </body>
 </html>

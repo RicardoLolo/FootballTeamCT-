@@ -3,6 +3,8 @@ package com.example.md4.service.Calendar;
 import com.example.md4.model.Calendar;
 import com.example.md4.repository.ICalendarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,7 +16,7 @@ public class CalendarService implements ICalendarService{
 
     @Override
     public Iterable<Calendar> findAll() {
-        return calendarRepository.findAll();
+        return calendarRepository.findListCalender();
     }
 
     @Override
@@ -35,5 +37,10 @@ public class CalendarService implements ICalendarService{
     @Override
     public Iterable<Calendar> findCalenderToday(String date) {
         return calendarRepository.findCalenderToday(date);
+    }
+
+    @Override
+    public Page<Calendar> findPage(Pageable pageable) {
+        return calendarRepository.findCalenderPage(pageable);
     }
 }
