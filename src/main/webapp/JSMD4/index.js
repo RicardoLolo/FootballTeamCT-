@@ -102,3 +102,78 @@ function deleteCalendar(id) {
         });
     }
 }
+
+function displayTotalCoachSalary(){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/api/coach/totalCoachSalary`,
+        success: function (data) {
+            console.log(data);
+            document.getElementById("totalCoachSalary").innerHTML = totalCoachSalary(data)
+        }
+    });
+}
+
+function displayTotalCoachBonus(){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/api/coach/totalCoachBonus`,
+        success: function (data) {
+            console.log(data);
+            document.getElementById("totalCoachBonus").innerHTML = totalCoachBonus(data)
+        }
+    });
+}
+
+
+function totalCoachSalary(totalCoachSalary){
+    return `<h5 class="text-white mb-0">$${totalCoachSalary} <span class="float-right">
+                <i class="fa fa-usd"></i></span>
+            </h5>`;
+}
+
+function totalCoachBonus(totalCoachBonus){
+    return `<p class="mb-0 text-white small-font">Total coach salary<span class="float-right">bonus $${totalCoachBonus}
+                <i class="zmdi zmdi-long-arrow-up"></i></span>
+            </p>`;
+}
+
+displayTotalCoachSalary();
+displayTotalCoachBonus();
+
+function displayTotalPlayerSalary(){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/api/player/totalPlayerSalary`,
+        success: function (data) {
+            console.log(data);
+            document.getElementById("totalPlayerSalary").innerHTML = totalPlayerSalary(data)
+        }
+    });
+}
+
+function totalPlayerSalary(totalPlayerSalary){
+    return `<h5 class="text-white mb-0">$${totalPlayerSalary} <span class="float-right">
+                <i class="fa fa-usd"></i></span>
+            </h5>`;
+}
+
+function displayTotalPlayerBonus(){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/api/player/totalPlayerBonus`,
+        success: function (data) {
+            console.log(data);
+            document.getElementById("totalPlayerBonus").innerHTML = totalPlayerBonus(data)
+        }
+    });
+}
+
+function totalPlayerBonus(totalPlayerBonus){
+    return `<p class="mb-0 text-white small-font">Total player salary<span class="float-right">bonus $${totalPlayerBonus}
+                <i class="zmdi zmdi-long-arrow-up"></i></span>
+            </p>`;
+}
+
+displayTotalPlayerSalary();
+displayTotalPlayerBonus();

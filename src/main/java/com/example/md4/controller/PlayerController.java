@@ -211,4 +211,16 @@ public class PlayerController {
         }
         return new ResponseEntity<>(playerPage, HttpStatus.OK);
     }
+
+    @GetMapping("/totalPlayerSalary")
+    public ResponseEntity<?> totalPlayerSalary(){
+        Double totalCoachSalary = playerRepository.totalPlayerSalary();
+        return new ResponseEntity<>(totalCoachSalary, HttpStatus.OK);
+    }
+
+    @GetMapping("/totalPlayerBonus")
+    public ResponseEntity<?> totalPlayerBonus(){
+        Double totalCoachBonus = playerRepository.totalPlayerBonus();
+        return new ResponseEntity<>(totalCoachBonus, HttpStatus.OK);
+    }
 }

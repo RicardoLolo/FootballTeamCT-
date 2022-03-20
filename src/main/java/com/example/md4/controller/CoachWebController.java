@@ -193,4 +193,15 @@ public class CoachWebController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    @GetMapping("/totalCoachSalary")
+    public ResponseEntity<?> totalCoachSalary(){
+        Double totalCoachSalary = iCoachRepository.totalCoachSalary();
+        return new ResponseEntity<>(totalCoachSalary, HttpStatus.OK);
+    }
+
+    @GetMapping("/totalCoachBonus")
+    public ResponseEntity<?> totalCoachBonus(){
+        Double totalCoachBonus = iCoachRepository.totalCoachBonus();
+        return new ResponseEntity<>(totalCoachBonus, HttpStatus.OK);
+    }
 }

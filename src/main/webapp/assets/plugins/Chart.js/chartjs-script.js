@@ -5,8 +5,8 @@
 
 		if ($('#lineChart').length) {
 			
-			var ctx = document.getElementById('lineChart').getContext('2d');
-			var myChart = new Chart(ctx, {
+			let ctx = document.getElementById('lineChart').getContext('2d');
+			let myChart = new Chart(ctx, {
 				type: 'line',
 				data: {
 					labels: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
