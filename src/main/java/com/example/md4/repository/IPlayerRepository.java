@@ -17,4 +17,10 @@ public interface IPlayerRepository extends JpaRepository<Player, Long> {
     Optional<Player> findByGmail(String username);
 
     Iterable<Player> findAllByNameContaining(String name);
+
+    @Query(value = "select sum(p.salary) from player as p ;", nativeQuery = true)
+    Double totalPlayerSalary();
+
+    @Query(value = "select sum(p.bonus) from player as p ;", nativeQuery = true)
+    Double totalPlayerBonus();
 }

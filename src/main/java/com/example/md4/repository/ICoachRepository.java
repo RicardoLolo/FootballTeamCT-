@@ -18,4 +18,9 @@ public interface ICoachRepository extends PagingAndSortingRepository<Coach, Long
     @Query(value = "select * from coach as c order by c.id desc limit 1", nativeQuery = true)
     Coach findCoachLast();
 
+    @Query(value = "select sum(c.salary) from coach as c ;", nativeQuery = true)
+    Double totalCoachSalary();
+
+    @Query(value = "select sum(c.bonus) from coach as c ;", nativeQuery = true)
+    Double totalCoachBonus();
 }
