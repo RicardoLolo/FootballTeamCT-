@@ -1,7 +1,6 @@
 package com.example.md4.controller;
 
 import com.example.md4.model.Calendar;
-import com.example.md4.model.Player;
 import com.example.md4.repository.ICalendarRepository;
 import com.example.md4.service.Calendar.ICalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +25,11 @@ public class CalendarController {
     @Autowired
     private ICalendarRepository calendarRepository;
 
-    @GetMapping("/list")
+    @GetMapping("/listEvent")
     public ResponseEntity<Iterable<Calendar>> listsCalendar() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        calendarRepository.deleteCalenderToday(dtf.format(now));
+//        calendarRepository.deleteCalenderToday(dtf.format(now));
         Iterable<Calendar> calendars = calendarService.findAll();
         return new ResponseEntity<>(calendars, HttpStatus.OK);
     }

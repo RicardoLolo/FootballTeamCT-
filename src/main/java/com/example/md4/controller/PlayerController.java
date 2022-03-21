@@ -124,16 +124,16 @@ public class PlayerController {
             String backGroundFileName = backGroundFile.getOriginalFilename();
             try {
                 FileCopyUtils.copy(avaFile.getBytes(), new File(upload_file_avatar + avaFileName));
-                player.setAvatarURL("webapp/Images/Avatar" + avaFileName);
+                player.setAvatarURL("Images/Avatar/" + avaFileName);
             } catch (IOException e) {
-                player.setAvatarURL("webapp/Images/Ghostblade (P.2)_ (20).jpg");
+                player.setAvatarURL("Images/Ghostblade (P.2)_ (20).jpg");
                 e.printStackTrace();
             }
             try {
                 FileCopyUtils.copy(backGroundFile.getBytes(), new File(upload_file_background + backGroundFileName));
-                player.setAvatarBackGround("webapp/Images/BackGround" + backGroundFileName);
+                player.setAvatarBackGround("Images/BackGround/" + backGroundFileName);
             } catch (IOException e) {
-                player.setAvatarURL("webapp/Images/Ghostblade (P.2)_ (20).jpg");
+                player.setAvatarURL("Images/Ghostblade (P.2)_ (20).jpg");
                 e.printStackTrace();
             }
             player.setBMI(player.getWeight() / (player.getHeight() * player.getHeight()));
@@ -161,14 +161,14 @@ public class PlayerController {
         String backGroundFileName = backGroundFile.getOriginalFilename();
         try {
             FileCopyUtils.copy(avaFile.getBytes(), new File(upload_file_avatar + avaFileName));
-            playerEdit.setAvatarURL("webapp/Images/Avatar" + avaFileName);
+            playerEdit.setAvatarURL("Images/Avatar/" + avaFileName);
         } catch (IOException e) {
             playerEdit.setAvatarURL(player.get().getAvatarURL());
             e.printStackTrace();
         }
         try {
             FileCopyUtils.copy(backGroundFile.getBytes(), new File(upload_file_background + backGroundFileName));
-            playerEdit.setAvatarBackGround("webapp/Images/BackGround" + backGroundFileName);
+            playerEdit.setAvatarBackGround("Images/BackGround/" + backGroundFileName);
         } catch (IOException e){
             playerEdit.setAvatarURL(player.get().getAvatarBackGround());
             e.printStackTrace();

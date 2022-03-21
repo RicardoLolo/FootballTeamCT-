@@ -19,7 +19,7 @@ public interface ICalendarRepository extends PagingAndSortingRepository<Calendar
             "order by c.date_start asc;", nativeQuery = true)
     Iterable<Calendar> findListCalender();
 
-    @Query(value = "delete from calendar c where c.date_finish < ?1;", nativeQuery = true)
+    @Query(value = "delete from calendar as c where c.date_finish < ?1;", nativeQuery = true)
     void deleteCalenderToday(String date);
 
     @Query(value = "select * from calendar c\n" +

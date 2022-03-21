@@ -113,16 +113,16 @@ public class CoachWebController {
             String backGroundFileName = backGroundFile.getOriginalFilename();
             try {
                 FileCopyUtils.copy(avaFile.getBytes(), new File(upload_file_avatar + avaFileName));
-                coach.setAvatarURL("webapp/Images/Avatar" + avaFileName);
+                coach.setAvatarURL("Images/Avatar/" + avaFileName);
             } catch (IOException e) {
-                coach.setAvatarURL("webapp/Images/Ghostblade (P.2)_ (20).jpg");
+                coach.setAvatarURL("Images/Ghostblade (P.2)_ (20).jpg");
                 e.printStackTrace();
             }
             try {
                 FileCopyUtils.copy(backGroundFile.getBytes(), new File(upload_file_background + backGroundFileName));
-                coach.setAvatarBackGround("webapp/Images/BackGround" + backGroundFileName);
+                coach.setAvatarBackGround("Images/BackGround/" + backGroundFileName);
             } catch (IOException e){
-                coach.setAvatarURL("webapp/Images/Ghostblade (P.2)_ (20).jpg");
+                coach.setAvatarURL("Images/Ghostblade (P.2)_ (20).jpg");
                 e.printStackTrace();
             }
             Coach coachCreate = iCoachService.save(coach);
@@ -150,14 +150,14 @@ public class CoachWebController {
         String backGroundFileName = backGroundFile.getOriginalFilename();
         try {
             FileCopyUtils.copy(avaFile.getBytes(), new File(upload_file_avatar + avaFileName));
-            coachEdit.setAvatarURL("webapp/Images/Avatar" + avaFileName);
+            coachEdit.setAvatarURL("Images/Avatar/" + avaFileName);
         } catch (IOException e) {
             coachEdit.setAvatarURL(coach.get().getAvatarURL());
             e.printStackTrace();
         }
         try {
             FileCopyUtils.copy(backGroundFile.getBytes(), new File(upload_file_background + backGroundFileName));
-            coachEdit.setAvatarBackGround("webapp/Images/BackGround" + backGroundFileName);
+            coachEdit.setAvatarBackGround("Images/BackGround/" + backGroundFileName);
         } catch (IOException e){
             coachEdit.setAvatarURL(coach.get().getAvatarBackGround());
             e.printStackTrace();
