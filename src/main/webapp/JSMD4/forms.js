@@ -84,6 +84,7 @@ function addNewCoach() {
                 } else {
                     document.getElementById("card-coach").innerHTML = "Sign Up Success !";
                     document.getElementById("form-new-coach").reset();
+                    window.location.href = "tables.html";
                 }
             }
         });
@@ -228,6 +229,7 @@ function addNewPlayer() {
                 } else {
                     document.getElementById("card-coach").innerHTML = "Sign Up Success !";
                     document.getElementById("form-new-player").reset();
+                    window.location.href = "tables.html";
                 }
             }
         });

@@ -1,3 +1,7 @@
+if (currentUser.roles[0].authority === "ADMIN" || currentUser.roles[0].authority === "COACH"){
+    document.getElementById("edit-coach").hidden = false;
+}
+
 function getTypeCoach() {
     $.ajax({
         type: "GET", //tên API

@@ -16,7 +16,7 @@ function getListCalender() {
     $.ajax({
         type: "GET",
         //tên API
-        url: `http://localhost:8080/api/calendar/list`,
+        url: `http://localhost:8080/api/calendar/listEvent`,
         success: function (data) {
             let display_list_calendar = '';
             for (let i = 0; i < data.length; i++) {
@@ -68,7 +68,7 @@ function isNextCalendar(pageNumber) {
     getCoachByPage(pageNumber+1)
 }
 
-getCalendarByPage(0);
+// getCalendarByPage(0);
 
 function eventCalendar(id){
     $.ajax({
